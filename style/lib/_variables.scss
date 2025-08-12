@@ -1,0 +1,32 @@
+$base-font: var(--font-poppins);
+$second-font: var(--font-caprasimo);
+
+$background: #EFEFEF;
+$black: #1D1D1B;
+$orange: #FF852B;
+$violet: #B992F9;
+$rose: #F874D8;
+
+@mixin mobile {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: 1024px) and (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}

@@ -1,0 +1,281 @@
+@use "./lib/_variables.scss" as vars;
+@use "./lib/_animations.scss" as anims;
+
+.profil-page-header {
+  padding: 250px 5vw 0 5vw;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+
+  .profil-header-left-container {
+    max-width: 400px;
+    width: 30%;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba($color: vars.$background, $alpha: .4);
+    backdrop-filter: blur(5px);
+
+    .image-container {
+      width: 100%;
+      background: white;
+      position: relative;
+      border-radius: 15px;
+      min-height: 250px;
+
+      img {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: auto;
+        width: 55%;
+      }
+    }
+
+    .contact-link-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      a {
+        background: vars.$black;
+        padding: 15px 20px;
+        border-radius: 30px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: opacity .3s;
+
+        svg {
+          width: 0;
+          transition: width .3s;
+        }
+
+        &:hover {
+          opacity: .7;
+
+          svg {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .profil-header-right-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    h3 {
+      font-size: 20vw;
+    }
+
+    .soft-skills-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: 27vw;
+      height: 27vw;
+      border: 1px solid vars.$black;
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+
+      li {
+        position: absolute;
+        padding: .45vw 1vw;
+        border-radius: 20px;
+        color: white;
+        white-space: unwrap;
+        width: max-content;
+        font-size: 1.2vw;
+      }
+    }
+  }
+}
+
+
+// Vision
+.vision-profil-page-container {
+display: flex;
+flex-direction: column;
+gap: 200px;
+padding: 200px 5vw 100px 5vw;
+
+.slider-container {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+gap: 20px;
+width: 100%;
+
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  span {
+    color: transparent;
+    text-transform: uppercase;
+    font-weight: bolder;
+    -webkit-text-stroke: 2px vars.$black;
+    font-size: 100px;
+    width: max-content;
+  }
+}
+
+
+.left {
+  @include anims.infiniteScrollLeft(20px, "categories-left-scroll");
+  animation: categories-left-scroll 25s infinite linear;
+  }
+
+  .right {
+    @include anims.infiniteScrollRight(20px, "categories-right-scroll");
+    animation: categories-right-scroll 25s infinite linear;
+  }
+}
+
+.list-visions {
+display: flex;
+flex-direction: column;
+gap: 200px;
+
+.vision-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+
+  .first-information-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+
+    .image-container {
+      width: 400px;
+      height: 400px;
+      background: rgba($color: vars.$background, $alpha: .8);
+      backdrop-filter: blur(5px);
+      border-radius: 50px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+
+      img {
+        width: 60%; 
+        height: auto
+      }
+    }
+
+    .information-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      h3 {
+        font-size: 3rem;
+        font-weight: bolder
+      }
+    }
+  }
+
+  .second-information-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+
+      .top-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        h3 {
+          font-size: 4rem;
+        }
+
+        hr {
+          width: 100%;
+          border-top: 2px dashed rgba($color: vars.$black, $alpha: .5);
+          border-bottom: 0;
+          border-left: 0;
+          border-right: 0;
+          }
+          }
+
+          h4 {
+            font-size: 1.5rem;
+            font-weight: normal;
+          }
+
+          p {
+            opacity: .5;
+            width: 80%
+          }
+        }
+      }
+
+      .last-information-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 50px;
+
+        .section-title {
+          font-weight: normal;
+          font-size: 2.5rem;
+        }
+
+        .competance-container {
+          display: flex;
+          align-items: flex-start;
+          gap: 300px;
+
+          .competances {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 1.2rem;
+
+            p {
+              opacity: .5;
+
+              &:nth-child(1){
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Diplomes
+.profil-diplomes-container {
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

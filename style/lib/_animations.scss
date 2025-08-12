@@ -1,0 +1,18 @@
+@mixin infiniteScrollLeft($offset, $name) {
+  @keyframes #{$name} {
+    from {
+      transform: translateX(calc(-100% - #{$offset}));
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+}
+
+@mixin infiniteScrollRight($offset, $name) {
+  @keyframes #{$name} {
+    to {
+      transform: translateX(calc(-100% - #{$offset}));
+    }
+  }
+}

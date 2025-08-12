@@ -1,95 +1,370 @@
+"use client"
+
+import FinalNavbar from "@/component/global/navbar";
+import { Colors, Sphere } from "@/component/global/sphere";
+import { Project } from "@/component/project";
+import { usePage } from "@/hooks/usePage";
+import "../style/homepage.scss"
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
+import * as REACT from "react"
+import { SectionTitle } from "@/component/global/sectionTitle";
+import { Competence } from "@/component/competence";
+import { Diplomes } from "@/component/diplomes";
+import { Reviews } from "@/component/reviews";
+import { Footer } from "@/component/global/footer";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [sliderIndex, setSliderIndex] = REACT.useState(0)
+  let pageInfo = usePage()
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  if ( !pageInfo.isMounted ) return null
+
+  const social_media = [
+    {
+      id: 0,
+      name: "Linkedin",
+      link: "https://www.linkedin.com/in/marine-sicaud/"
+    },
+    {
+      id: 1,
+      name: "Gmail",
+      link: "mailto:sicaud.marine.pro@gmail.com"
+    }
+  ]
+
+  const diplomes = [
+    {
+      id: 1,
+      ecole: "MDS",
+      nom_diplome: "testing",
+      description: `J'ai choisi d'intégrer My Digital School pour développer mes compétences en marketing digital, un domaine qui me passionne profondément pour son pouvoir à transformer la visibilité et la croissance des marques. Cette formation m'a permis d'acquérir des compétences solides en marketing digital, me permettant de concevoir des stratégies efficaces et de mesurer leur impact à travers des outils et des techniques modernes. \n \n
+
+En parallèle, j'ai exploré la communication, un domaine clé pour diffuser des messages percutants et engager efficacement une audience. J'ai développé des compétences en création de contenu pour différents supports, en élaboration de stratégies de communication et en gestion des relations publiques. Cette expertise m’a sensibilisée à l’importance de l’alignement des messages, de la gestion de la réputation de marque, et de la cohérence dans l’ensemble des actions de communication pour instaurer une relation de confiance et favoriser l’engagement. \n \n
+
+Grâce à cette double compétence, je suis désormais capable de coordonner efficacement des projets digitaux, en combinant stratégie marketing et design graphique, pour offrir des résultats créatifs et performants, tout en garantissant des livrables de qualité qui répondent aux besoins des clients et utilisateurs.`
+    },
+    {
+      id: 2,
+      ecole: "MDS",
+      nom_diplome: "testing",
+      description: "oui"
+    },
+    {
+      id: 3,
+      ecole: "MDS",
+      nom_diplome: "testing",
+      description: "oui"
+    },
+  ]
+
+
+  let reviews = [
+    {
+      id: 1,
+      name: "Theo Derive",
+      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
+    },
+    {
+      id: 2,
+      name: "Theo Derive",
+      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
+      job: "Testeur de site internet"
+    },
+    {
+      id: 3,
+      name: "Theo Derive",
+      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
+    },
+    {
+      id: 4,
+      name: "Theo Derive",
+      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
+      job: "Testeur de site internet"
+    },
+  ]
+
+
+  return (
+    <>
+      <FinalNavbar pageInfo={pageInfo} />
+
+      <Sphere
+        className="homepage-header-sphere-1"
+        container={{
+          top: 0,
+          left: "unset",
+          bottom: "unset",
+          right: 0,
+          width: 800,
+          height: 800
+        }}
+        sphere={{
+          top: -200,
+          left: "unset",
+          bottom: "unset",
+          right: -300,
+          color: Colors.Rose
+        }}
+
+      />
+
+
+      <section className="header-container">
+
+        <Sphere
+          className="homepage-header-sphere-2"
+          container={{
+            top: "unset",
+            right: "unset",
+            bottom: -400,
+            left: 0,
+            width: 800,
+            height: 800
+          }}
+          sphere={{
+            top: "unset",
+            left: -400,
+            bottom: 0,
+            right: "unset",
+            color: Colors.Orange
+          }}
+
+        />
+
+        <section className="header-left">
+          <h1>Marketing <span className="special-word">Digital</span> <br/> & Communication <span className="special-word" style={{fontSize: "3rem"}}>.</span></h1>
+
+          <Link href={"mailto:marine.sicaud.pro@gmail.com"} className="contact-button">
+            Contactez-moi 
             <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              alt="image de salut"
+              src="/images/coucou-icon.png"
+              width={40}
+              height={40}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          </Link>
+
+          <ul className="numbers-information-container">
+            <li>
+              <p className="numbers">+10</p>
+              <p className="information">Stratégies marketing conçues et présentées </p>
+            </li>
+
+            <li>
+              <p className="numbers">+5</p>
+              <p className="information">Certifications obtenues</p>
+            </li>
+
+            <li>
+              <p className="numbers">+10</p>
+              <p className="information">Outils Stratégiques maitrisés </p>
+            </li>
+          </ul>
+        </section>
+
+        <section className="header-right">
+          <p>Bienvenue sur mon portfolio</p>
+          <Image
+            alt="Emoji qui vous salue"
+            src={"/images/hi-marine.png"}
+            width={200}
+            height={200}
+          />
+        </section>
+      </section>
+
+
+      <section className="projects-slider-container">
+
+        <SectionTitle text="Projets Récents" color={Colors.Rose} />
+
+        {
+          sliderIndex > 0 ? 
+            <span className="left-arrow" onClick={() => setSliderIndex(sliderIndex-1)}/>
+            :
+            null
+        }
+        {
+          sliderIndex < 2 ?
+            <span className="right-arrow" onClick={() => {
+              setSliderIndex(sliderIndex+1)
+              console.log("click")
+            }} />
+            :
+            null
+        }
+
+        <ul className="projects-slider" style={{ transform: `translateX(-${sliderIndex * 36 }%)` }}>
+          <Project
+            title="Jimmy Fairly 1"
+            image_url="/images/MockupZigZag.jpg"
+            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
+            id={1}
+            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
+            date="test"
+          />
+
+          <Project
+            title="Jimmy Fairly"
+            image_url="/images/MockupZigZag.jpg"
+            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
+            id={1}
+            date="test"
+            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
+          />
+
+          <Project
+            title="Jimmy Fairly"
+            image_url="/images/MockupZigZag.jpg"
+            date="test"
+            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
+            id={1}
+            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
+          />
+        </ul>
+      </section>
+
+      <section className="categories-homepage">
+        <div className="slider-container" style={{ rotate: "-2deg" }}>
+          <div className="slider right">
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+          </div>
+          <div className="slider right">
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <Sphere
+          className="homepage-categories-sphere-1"
+          container={{
+            top: 0,
+            right: 0,
+            left: 'unset',
+            bottom: "unset",
+            width: 800,
+            height:800
+          }}
+
+          sphere={{
+            top:0,
+            right: -350,
+            bottom: "unset",
+            left: "unset",
+            color: Colors.Orange
+          }}
+        />
+
+        <Sphere
+          className="homepage-categories-sphere-2"
+          container={{
+            bottom: 0,
+            left: 0,
+            right: 'unset',
+            top: "unset",
+            width: 800,
+            height:800
+          }}
+
+          sphere={{
+            top:0,
+            left: -250,
+            bottom: "unset",
+            right: "unset",
+            color: Colors.Rose
+          }}
+        />
+
+        <ul className="categories-container">
+          <Link href={"/projets?type=Marketing"} style={{color: Colors.Violet}}>Marketing</Link>
+          <Link href={"/projets?type=Logofolio"} style={{color: Colors.Orange}}>Logofolio</Link>
+          <Link href={"/projets?type=Branding"} style={{color: Colors.Rose}}>Branding</Link>
+        </ul>
+
+        <div className="slider-container" style={{ rotate: "2deg" }}>
+          <div className="slider left">
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+          </div>
+          <div className="slider left">
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+            <span>PROJETS</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="homepage-competences-container">
+        <SectionTitle text="Mes Competences" color={Colors.Violet} />
+
+        <section className="competences-design-container">
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+        </section>
+
+        <section className="competences-marketing-container">
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+        </section>
+      </section>
+
+      <section className="homepage-diplomes-container">
+        <SectionTitle text="Diplômes  &  Certifications" color={Colors.Orange} />
+
+        <Diplomes diplomes={diplomes} />
+      </section>
+
+      <section className="homepage-reviews-container">
+        <SectionTitle text="Votre avis compte" color={Colors.Rose} />
+        <Reviews reviews={reviews} />
+      </section>
+
+
+      <Footer social_media={social_media} />
+    </>
   );
 }

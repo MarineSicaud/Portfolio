@@ -1,0 +1,35 @@
+@use "./lib/_variables.scss" as vars;
+
+
+.project-page-container {
+  padding: 200px 5vw 100px 5vw;
+  diplay: flex;
+  flex-direction: column;
+}
+
+.filters-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+
+
+  .filter-select {
+    font-size: .9rem;
+    outline: 0;
+    border: 1px solid vars.$black;
+    padding: 10px;
+    border-radius: 10px;
+
+    &::picker(select){
+      background: blue !important;
+    }
+  }
+}
+
+.project-list-container {
+  display: grid;
+  grid-gap: 50px;
+  grid: auto / 1fr 1fr;
+}
