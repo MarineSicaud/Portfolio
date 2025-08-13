@@ -14,7 +14,8 @@ export type ProjectContent = {
   title: string,
   description?: string,
   images: {
-    url: string,
+    file: File,
+    path: string,
     alt: string,
     offsetTop: number,
     strengh: number,
@@ -31,7 +32,7 @@ export type Project = {
   services: string[],
   client: string,
   duree: string,
-  background_image: string,
+  background_image: File,
   link?: string
   content: ProjectContent[]
 }

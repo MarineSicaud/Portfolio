@@ -27,7 +27,6 @@ async function GET(req: Request) {
 
   } catch (error) {
     console.log(error)
-
     return HttpResponse(StatusCode.InternalError)
   }
 }

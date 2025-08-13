@@ -1,6 +1,9 @@
 import { Competence, NewCompetence } from "@/types/competences_type";
 import { StatusCode } from "@/types/http_response_type";
 import { Competences } from "@/utils/competences";
+import { ImagesGestion } from "@/utils/file";
+import { formToObject } from "@/utils/formToObject";
+import { Github } from "@/utils/github";
 import { HttpResponse } from "@/utils/http_response";
 import { connectionToDatabase } from "@/utils/mongodb";
 
@@ -29,25 +32,71 @@ async function GET(req: Request){
 async function POST(req: Request){
   await connectionToDatabase()
 
-  let json = await req.json() as NewCompetence
+  let formData = await req.formData()
+  let competence = formToObject<NewCompetence>(formData)
 
-  const new_comp = await Competences.new_competence(json)
+  let image_gestion = new ImagesGestion()
+  let github_manager = new Github()
 
-  if ( !new_comp ) return HttpResponse(StatusCode.ConflicWithServer)
+  let filter_image_to_push = await image_gestion.append_file([competence.image])
 
-  return HttpResponse(StatusCode.Success)
+  let push_passed = true
+
+  if ( filter_image_to_push.files.length > 0 ) {
+    let push_images = await github_manager.push_gihtub_files(filter_image_to_push.files)
+
+    push_passed = push_images
+  }
+
+  if ( push_passed ) {
+    let save_images = await filter_image_to_push.new_image()
+
+    if ( !save_images ) return HttpResponse(StatusCode.ConflicWithServer)
+
+    const new_comp = await Competences.new_competence(competence)
+
+    if ( !new_comp ) return HttpResponse(StatusCode.ConflicWithServer)
+
+    return HttpResponse(StatusCode.Success)
+  }
+
+  return HttpResponse(StatusCode.InternalError)
 }
 
 async function PATCH(req: Request) {
   await connectionToDatabase()
 
-  let json = await req.json() as Competence
+  let formData = await req.formData()
+  let competence = formToObject<Competence>(formData)
 
-  const update_comp = await Competences.update_competence(json)
+  if ( !competence._id ) return HttpResponse(StatusCode.UnAuthorized)
 
-  if ( !update_comp ) return HttpResponse(StatusCode.ConflicWithServer)
+  let image_gestion = new ImagesGestion()
+  let github_manager = new Github()
 
-  return HttpResponse(StatusCode.Success)
+  let filter_image_to_push = await image_gestion.append_file([competence.image])
+
+  let push_passed = true
+
+  if ( filter_image_to_push.files.length > 0 ){
+    let push_images = await github_manager.push_gihtub_files(filter_image_to_push.files)
+
+    push_passed = push_images
+  }
+
+  if ( push_passed ) {
+    let save_images = await filter_image_to_push.new_image()
+
+    if ( !save_images ) return HttpResponse(StatusCode.ConflicWithServer)
+
+    const update_comp = await Competences.update_competence(competence)
+
+    if ( !update_comp ) return HttpResponse(StatusCode.ConflicWithServer)
+
+    return HttpResponse(StatusCode.Success)
+  }
+
+  return HttpResponse(StatusCode.InternalError)
 }
 
 async function DELETE(req: Request) {

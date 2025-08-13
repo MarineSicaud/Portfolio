@@ -1,10 +1,10 @@
 export type Competence = {
   _id: string,
   name: string,
-  image_url: string
+  image: File
 }
 
 export type NewCompetence = {
   name: string,
-  image_url: string
+  image: File
 }

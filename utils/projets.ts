@@ -45,23 +45,31 @@ class Projet {
 
     const { title, description, background_image, services, duree, client, competences, link, content } = p
 
+    let content_with_image_path = content.map(c => ({
+      ...c,
+      images: c.images.map(img => ({
+        ...img,
+        path: `/images/${img.file.name}`
+      }))
+    }))
+
     const new_project = await ProjetModel.create({
       title,
       description,
-      background_image,
+      background_image: `/images/${background_image.name}`,
       services,
       duree,
       client,
       competences,
       link,
-      content
+      content: content_with_image_path
     })
 
     const new_projet_component = await ProjetComponentModel.create({
       id_projet: new_project._id,
       title,
       description,
-      image_url: background_image,
+      image_url: `/images/${background_image.name}`,
       services,
       date: `${date.getUTCDate()}-${date.getUTCMonth()}-${date.getUTCFullYear()}`
     })
@@ -92,7 +100,7 @@ class Projet {
     const project_update = await ProjetModel.updateOne({ _id: new mongoose.Types.ObjectId(_id) }, {
       title,
       description,
-      background_image,
+      background_image: `/images/${background_image.name}`,
       services,
       duree,
       client,
@@ -107,7 +115,7 @@ class Projet {
         title,
         description,
         services,
-        image_url: background_image
+        image_url: `/images/${background_image.name}`
       }
     )
 
