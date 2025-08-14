@@ -1,6 +1,6 @@
 "use client"
 
-import { ResponsiveValues, usePageReturn } from "@/hooks/usePage"
+import { ResponsiveValues, usePage, usePageReturn } from "@/hooks/usePage"
 
 import * as REACT from "react"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
@@ -12,7 +12,9 @@ type Props = {
   pageInfo: usePageReturn
 }
 
-function FinalNavbar({ pageInfo }: Props){
+function FinalNavbar(){
+  const pageInfo = usePage()
+
   if ( !pageInfo.responsiveInfo || !pageInfo.windowInfo ) return null
 
   return <>

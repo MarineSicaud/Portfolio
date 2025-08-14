@@ -1,25 +1,22 @@
-"use client"
+"server side"
 
-import FinalNavbar from "@/component/global/navbar";
 import { Colors, Sphere } from "@/component/global/sphere";
-import { Project } from "@/component/project";
-import { usePage } from "@/hooks/usePage";
 import "../style/homepage.scss"
 
 import Image from "next/image";
 import Link from "next/link";
-import * as REACT from "react"
 import { SectionTitle } from "@/component/global/sectionTitle";
 import { Competence } from "@/component/competence";
 import { Diplomes } from "@/component/diplomes";
 import { Reviews } from "@/component/reviews";
 import { Footer } from "@/component/global/footer";
+import { HomeProject } from "@/component/home_projects";
+import { ProjectComponent } from "@/types/project_type";
 
-export default function Home() {
-  const [sliderIndex, setSliderIndex] = REACT.useState(0)
-  let pageInfo = usePage()
-
-  if ( !pageInfo.isMounted ) return null
+export default async function Home() {
+  const projectsRequest = await fetch("http://127.0.0.1:3000/api/projets/components")
+  let projectsJson = await projectsRequest.json()
+  let projects = projectsJson.data as [ ProjectComponent, ProjectComponent, ProjectComponent ]
 
   const social_media = [
     {
@@ -88,8 +85,6 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
 
   return (
     <>
-      <FinalNavbar pageInfo={pageInfo} />
-
       <Sphere
         className="homepage-header-sphere-1"
         container={{
@@ -175,56 +170,7 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
         </section>
       </section>
 
-
-      <section className="projects-slider-container">
-
-        <SectionTitle text="Projets Récents" color={Colors.Rose} />
-
-        {
-          sliderIndex > 0 ? 
-            <span className="left-arrow" onClick={() => setSliderIndex(sliderIndex-1)}/>
-            :
-            null
-        }
-        {
-          sliderIndex < 2 ?
-            <span className="right-arrow" onClick={() => {
-              setSliderIndex(sliderIndex+1)
-              console.log("click")
-            }} />
-            :
-            null
-        }
-
-        <ul className="projects-slider" style={{ transform: `translateX(-${sliderIndex * 36 }%)` }}>
-          <Project
-            title="Jimmy Fairly 1"
-            image_url="/images/MockupZigZag.jpg"
-            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
-            id={1}
-            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
-            date="test"
-          />
-
-          <Project
-            title="Jimmy Fairly"
-            image_url="/images/MockupZigZag.jpg"
-            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
-            id={1}
-            date="test"
-            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
-          />
-
-          <Project
-            title="Jimmy Fairly"
-            image_url="/images/MockupZigZag.jpg"
-            date="test"
-            services={["Je ne sais pas", "testing", "Je teste les longues phrase au cas ou"]}
-            id={1}
-            description="Je ne sais pas quoi mettre en description, mais il faut quelle soient un peu plus longue pour savoir si je peux faire quelque chose de styler en css ou pas"
-          />
-        </ul>
-      </section>
+      <HomeProject projects={projects} />
 
       <section className="categories-homepage">
         <div className="slider-container" style={{ rotate: "-2deg" }}>

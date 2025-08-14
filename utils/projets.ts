@@ -97,6 +97,14 @@ class Projet {
   static async update_project(p: Project): Promise<boolean> {
     const { _id, title, description, background_image, services, duree, client, competences, link, content } = p
 
+    let content_with_image_path = content.map(c => ({
+      ...c,
+      images: c.images.map(img => ({
+        ...img,
+        path: `/images/${img.file.name}`
+      }))
+    }))
+
     const project_update = await ProjetModel.updateOne({ _id: new mongoose.Types.ObjectId(_id) }, {
       title,
       description,
@@ -106,7 +114,7 @@ class Projet {
       client,
       competences,
       link,
-      content
+      content: content_with_image_path
     })
 
     const project_component_update = await ProjetComponentModel.updateOne(

@@ -1,6 +1,6 @@
 "use client"
 
-import * as REACT from "react"
+import * as React from "react"
 
 enum ResponsiveValues {
   Mobile = "mobile", 
@@ -22,11 +22,11 @@ export type usePageReturn = {
 }
 
 function usePage(){
-  const [responsiveInfo, setResponciveInfo] = REACT.useState<ResponsiveValues>(ResponsiveValues.Mobile)
-  const [windowInfo, setWindowInfo] = REACT.useState<WindowType | null>(null)
-  const [isMounted, setIsMounted] = REACT.useState(false)
+  const [responsiveInfo, setResponciveInfo] = React.useState<ResponsiveValues>(ResponsiveValues.Mobile)
+  const [windowInfo, setWindowInfo] = React.useState<WindowType | null>(null)
+  const [isMounted, setIsMounted] = React.useState(false)
 
-  REACT.useEffect(() => {
+  React.useEffect(() => {
     setIsMounted(true)
   }, [])
 
@@ -61,7 +61,7 @@ function usePage(){
 
 
   // Event Listener relative to the page
-  REACT.useEffect(() => {
+  React.useEffect(() => {
     if ( !isMounted ) return
 
     updateResponsiveInfo()

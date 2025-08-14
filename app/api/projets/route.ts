@@ -1,3 +1,4 @@
+import { Competence } from "@/types/competences_type";
 import { StatusCode } from "@/types/http_response_type";
 import { Project } from "@/types/project_type";
 import { ImagesGestion } from "@/utils/file";
@@ -23,6 +24,30 @@ async function GET(req: Request){
   return HttpResponse(StatusCode.NotFound)
 }
 
+type POSTProject = {
+  title: string,
+  description: string,
+  competences: Competence[],
+  services: string[],
+  client: string,
+  duree: string,
+  background_image: File,
+  link?: string
+  content: {
+    title: string,
+    description?: string,
+    images: {
+      file: File,
+      path: string
+      alt: string,
+      offsetTop: number,
+      strengh: number,
+      responciveOffsetTop: number,
+      responciveStrengh: number
+    }[]
+  }[]
+}
+
 async function POST(req: Request){
   await connectionToDatabase()
 
@@ -32,11 +57,7 @@ async function POST(req: Request){
 
   // Transform image for type wanted
   // Here its's for a project
-  let project = formToObject<Project>(formData)
-
-  // If in the project, there is an id, return an error,
-  // because that mean that the project already exist
-  if ( project._id ) return HttpResponse(StatusCode.ConflicWithServer)
+  let project = formToObject<POSTProject>(formData)
 
   // Create utilities managers
   let image_gestion = new ImagesGestion()
@@ -77,7 +98,7 @@ async function POST(req: Request){
     if ( !save_images_path ) return HttpResponse(StatusCode.ConflicWithServer)
 
     // And create project in database
-    const create_projet = await Projet.new_project(project)
+    const create_projet = await Projet.new_project(project as Project)
 
     if( create_projet ){
       return HttpResponse(StatusCode.Success)
@@ -90,11 +111,38 @@ async function POST(req: Request){
   return HttpResponse(StatusCode.InternalError)
 }
 
+type PATCHProject = {
+  _id: string,
+  title: string,
+  description: string,
+  competences: Competence[],
+  services: string[],
+  client: string,
+  duree: string,
+  background_image: File,
+  link?: string
+  content: {
+    title: string,
+    description?: string,
+    images: {
+      file: File,
+      path: string
+      alt: string,
+      offsetTop: number,
+      strengh: number,
+      responciveOffsetTop: number,
+      responciveStrengh: number
+    }[]
+  }[]
+}
+
 async function PATCH(req: Request) {
   await connectionToDatabase()
 
   let formData = await req.formData()
-  let project = formToObject<Project>(formData)
+  let project = formToObject<PATCHProject>(formData)
+
+  if ( !project._id ) return HttpResponse(StatusCode.NotFound)
 
   let image_gestion = new ImagesGestion()
   let github_manager = new Github()
@@ -132,7 +180,7 @@ async function PATCH(req: Request) {
 
     return HttpResponse(StatusCode.NotFound)
   }
-  
+
   return HttpResponse(StatusCode.InternalError)
 }
 
