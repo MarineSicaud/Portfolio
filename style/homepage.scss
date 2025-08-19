@@ -166,17 +166,17 @@
       }
     }
 
+    @include anims.infiniteScrollRight(20px, "categories-right-scroll");
+    @include anims.infiniteScrollLeft(20px, "categories-left-scroll");
 
     .left {
-      @include anims.infiniteScrollLeft(20px, "categories-left-scroll");
       animation: categories-left-scroll 25s infinite linear;
-      }
-
-      .right {
-        @include anims.infiniteScrollRight(20px, "categories-right-scroll");
-        animation: categories-right-scroll 25s infinite linear;
-      }
     }
+
+    .right {
+      animation: categories-right-scroll 25s infinite linear;
+    }
+  }
 
 
     .categories-container {

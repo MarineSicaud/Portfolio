@@ -1,13 +1,7 @@
 "use client"
 
+import { ReviewType } from "@/types/review_type"
 import * as REACT from "react"
-
-type ReviewType = {
-  id: number,
-  name: string,
-  review: string,
-  job?: string
-}
 
 type Props = {
   reviews: ReviewType[]

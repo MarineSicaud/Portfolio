@@ -1,10 +1,12 @@
+"use client"
+
 import { ProjectComponent } from "@/types/project_type";
 
 import Image from "next/image";
 import Link from "next/link";
 import * as REACT from "react"
 
-function Project(project: ProjectComponent) {
+function Project({ project, updating }: { project: ProjectComponent, updating: boolean }) {
   const [position, setPosition] = REACT.useState({
     top: 0,
     left: 0
@@ -22,8 +24,6 @@ function Project(project: ProjectComponent) {
       top: e.clientY - bound.top, 
       left: e.clientX - bound.left
     })
-
-    console.log(e.layerX, e.layerY)
   }
 
   REACT.useEffect(() => {
@@ -39,7 +39,8 @@ function Project(project: ProjectComponent) {
   }, [image_container])
 
 
-  return <Link href={`/projets/${project._id}`} className="project-component-container" key={project._id}>
+
+  return <Link href={`${updating ? "/dashboard" : ""}/projets/${project.id_projet}`} className="project-component-container" key={project._id}>
     <div className="image-container" ref={image_container}>
       <Image
         alt={`Image de presentation du projet: ${project.title}`} 

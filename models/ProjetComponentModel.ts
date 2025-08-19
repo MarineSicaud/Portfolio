@@ -17,6 +17,14 @@ const ProjetComponentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  type: {
+    type: String,
+    require: true
+  },
+  competences: {
+    type: Array,
+    require: true
+  },
   services: {
     type: Array,
     require: true
@@ -24,6 +32,10 @@ const ProjetComponentSchema = new mongoose.Schema({
   date: {
     type: String,
     require: true
+  },
+  id_project: {
+    type: String,
+    require: true,
   }
 }, { strict: true })
 

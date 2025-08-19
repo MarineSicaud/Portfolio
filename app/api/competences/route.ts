@@ -35,6 +35,7 @@ async function POST(req: Request){
   let formData = await req.formData()
   let competence = formToObject<NewCompetence>(formData)
 
+
   let image_gestion = new ImagesGestion()
   let github_manager = new Github()
 
@@ -68,13 +69,20 @@ async function PATCH(req: Request) {
 
   let formData = await req.formData()
   let competence = formToObject<Competence>(formData)
+  console.log(competence)
 
   if ( !competence._id ) return HttpResponse(StatusCode.UnAuthorized)
 
   let image_gestion = new ImagesGestion()
   let github_manager = new Github()
 
-  let filter_image_to_push = await image_gestion.append_file([competence.image])
+  let images = []
+
+  if ( typeof competence.image !== "string") {
+    images.push(competence.image)
+  }
+
+  let filter_image_to_push = await image_gestion.append_file(images)
 
   let push_passed = true
 

@@ -2,20 +2,16 @@
 
 import { ResponsiveValues, usePage, usePageReturn } from "@/hooks/usePage"
 
-import * as REACT from "react"
+import * as React from "react"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import Link from "next/link"
 
-type Props = {
-  pageInfo: usePageReturn
-}
-
 function FinalNavbar(){
   const pageInfo = usePage()
 
-  if ( !pageInfo.responsiveInfo || !pageInfo.windowInfo ) return null
+  if ( !pageInfo.responsiveInfo || !pageInfo.windowInfo || !pageInfo.isMounted ) return null
 
   return <>
     {
@@ -29,7 +25,7 @@ function FinalNavbar(){
 
 
 function Mobile(){
-  const [isOpen, setIsOpen] = REACT.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
 
   return <header className={"mobile-header"}>
     <nav>
@@ -74,9 +70,9 @@ function Mobile(){
 
 
 function Desktop({ scrollY }: { scrollY: number }){
-  const [isActive, setIsActive] = REACT.useState(true)
+  const [isActive, setIsActive] = React.useState(true)
 
-  REACT.useEffect(() => {
+  React.useEffect(() => {
     if(scrollY >= 120){
       setIsActive(true)
     }else {

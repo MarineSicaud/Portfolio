@@ -21,6 +21,10 @@ const ProjetSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  type: {
+    type: String,
+    require: true
+  },
   duree: {
     type: String,
     require: true

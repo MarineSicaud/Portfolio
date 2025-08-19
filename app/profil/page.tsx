@@ -1,140 +1,22 @@
-'use client'
-
 import Image from "next/image"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { gsap } from "gsap"
-import { useGSAP } from "@gsap/react"
-import * as REACT from 'react'
 
-import FinalNavbar from "@/component/global/navbar"
-import { usePage } from "@/hooks/usePage"
 import { Colors, Sphere } from "@/component/global/sphere"
-import { getRandom } from "@/utils/get_random"
 
 import "../../style/profil.scss"
-import { Diplomes } from "@/component/diplomes"
 import { Footer } from "@/component/global/footer"
-import { SectionTitle } from "@/component/global/sectionTitle"
+import { Skills } from "@/component/skills"
+import { Fetching } from "@/utils/fetching"
+import { DiplomeType } from "@/types/diplomes_types"
+import { Diplomes } from "@/component/diplomes"
 
-const colors = [Colors.Rose, Colors.Orange, Colors.Violet]
 
-const skills = [
-  {
-    text: "Esprit d'équipe",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 50,
-      y: 92,
-      deg: 0
-    }
-  },
-  {
-    text: "Persévérance",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 18,
-      y: 72,
-      deg: 45
-    }
-  },
-  {
-    text: "Autonomie",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 53,
-      y: 81.7,
-      deg: 0
-    }
-  },
-  {
-    text: "Adaptabilité",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 78,
-      y: 68,
-      deg: -15
-    }
-  },
-  {
-    text: "Organisation",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 40,
-      y: 68,
-      deg: 13
-    }
-  },
-  {
-    text: "Créativité",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 60,
-      y: 59.5,
-      deg: 0
-    }
-  },
-  {
-    text: "Curiosité",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 20,
-      y: 53.5,
-      deg: 12
-    }
-  },
-  {
-    text: "Communication",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 75,
-      y: 50,
-      deg: 10
-    }
-  },
-  {
-    text: "Leadership",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 35.5,
-      y: 45,
-      deg: 5
-    }
-  },
-  {
-    text: "Autodidacte",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 22,
-      y: 34,
-      deg: 2
-    }
-  },
-  {
-    text: "Esprit critique",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 79,
-      y: 40.5,
-      deg: 10
-    }
-  },
-  {
-    text: "Esprit d'équipe",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 50,
-      y: 26,
-      deg: 6
-    }
-  },
-]
-
-export default function Profil(){
-  const pageinfo = usePage()
-
-  const skillsRef = REACT.useRef<HTMLLIElement[]>([])
+export default async function Profil(){
+  const diplomes = await Fetching.getDatas<DiplomeType[]>("/diplomes")
+  
+  if ( diplomes === false ) return null
 
   const social_media = [
     {
@@ -149,79 +31,7 @@ export default function Profil(){
     }
   ]
 
-  const diplomes = [
-    {
-      id: 1,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: `J'ai choisi d'intégrer My Digital School pour développer mes compétences en marketing digital, un domaine qui me passionne profondément pour son pouvoir à transformer la visibilité et la croissance des marques. Cette formation m'a permis d'acquérir des compétences solides en marketing digital, me permettant de concevoir des stratégies efficaces et de mesurer leur impact à travers des outils et des techniques modernes. \n \n
-
-En parallèle, j'ai exploré la communication, un domaine clé pour diffuser des messages percutants et engager efficacement une audience. J'ai développé des compétences en création de contenu pour différents supports, en élaboration de stratégies de communication et en gestion des relations publiques. Cette expertise m’a sensibilisée à l’importance de l’alignement des messages, de la gestion de la réputation de marque, et de la cohérence dans l’ensemble des actions de communication pour instaurer une relation de confiance et favoriser l’engagement. \n \n
-
-Grâce à cette double compétence, je suis désormais capable de coordonner efficacement des projets digitaux, en combinant stratégie marketing et design graphique, pour offrir des résultats créatifs et performants, tout en garantissant des livrables de qualité qui répondent aux besoins des clients et utilisateurs.`
-    },
-    {
-      id: 2,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: "oui"
-    },
-    {
-      id: 3,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: "oui"
-    },
-  ]
-
-
-  let reviews = [
-    {
-      id: 1,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-    },
-    {
-      id: 2,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-      job: "Testeur de site internet"
-    },
-    {
-      id: 3,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-    },
-    {
-      id: 4,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-      job: "Testeur de site internet"
-    },
-  ]
-
-  useGSAP(() => {
-    if (skillsRef.current.length === 0) return
-    for (let i = 0; i < skillsRef.current.length; i++){
-      let el = skillsRef.current[i] as HTMLElement;
-
-      gsap.fromTo(el.style, 
-        {
-          transform: `translate(-50%, -${getRandom(200, 600)}%) rotate(${skills[i].position.deg}deg)`,
-        },
-        {
-          transform: `translate(-50%, -50%) rotate(${skills[i].position.deg}deg)`,
-          duration: 1,
-          delay: 1,
-          ease: "bounce.out"
-        }
-      )
-    }
-  }, [skillsRef])
-
   return <>
-    <FinalNavbar pageInfo={pageinfo} />
-
     <section className="profil-page-header">
       <div className="profil-header-left-container">
         <div className="image-container">
@@ -262,29 +72,7 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
         className="profil-header-sphere"
       />
 
-      <div className="profil-header-right-container">
-        <h3>SKILLS</h3>
-
-        <div className="soft-skills-container">
-          {
-            skills.map((v, i) => (
-              <li 
-                ref={(el) => {
-                  if (el) skillsRef.current[i] = el
-                }} 
-                key={i} 
-                style={{ 
-                  background: colors[v.color], 
-                  top: `${v.position.y}%`, 
-                  left: `${v.position.x}%`, 
-                  transform: `translate(-50%, -50%) rotate(${v.position.deg}deg)`
-                }}>
-                {v.text}
-              </li>
-            ))
-          }
-        </div>
-      </div>
+      <Skills />
     </section>
 
     <section className="vision-profil-page-container">

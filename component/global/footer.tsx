@@ -21,7 +21,7 @@ function Footer({ social_media }: Props){
 
       {
         new Array(10).fill("").map((_, i) => (
-          <Link href={"mailto:sicaud.marine.pro@gmail.com"} className={`future-${colors[(i - 1) % 3]}`}>
+          <Link key={i} href={"mailto:sicaud.marine.pro@gmail.com"} className={`future-${colors[(i - 1) % 3]}`}>
             CONTACTEZ-MOI
             <span className="footer-element-arrow">
               <FontAwesomeIcon icon={faArrowRight} />

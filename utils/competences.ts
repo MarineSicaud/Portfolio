@@ -21,10 +21,11 @@ class Competences {
 
   // New competence
   static async new_competence(c: NewCompetence): Promise<boolean>{
-    const { image, name } = c
+    const { image, type, name } = c
 
     const new_comp = await CompetenceModel.create({
       name,
+      type,
       image_url: `/images/${image.name}`
     })
 
@@ -38,11 +39,12 @@ class Competences {
 
   // Update competence
   static async update_competence(c: Competence): Promise<boolean> {
-    const { _id, name, image } = c
+    const { _id, name, type, image } = c
 
     const update_comp = await CompetenceModel.updateOne({ _id: new mongoose.Types.ObjectId(_id) }, {
       name,
-      image_url: `/images/${image.name}`
+      type,
+      image_url: typeof image === "string" ? image : `/images/${image.name}`
     })
 
     if ( update_comp.modifiedCount === 1 ) return true

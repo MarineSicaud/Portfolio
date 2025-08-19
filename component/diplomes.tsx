@@ -2,23 +2,18 @@
 
 import * as REACT from "react"
 import { Colors } from "./global/sphere"
-
-
-type Diplome = {
-  id: number,
-  ecole: string,
-  nom_diplome: string,
-  description: string
-}
+import { DiplomeType } from "@/types/diplomes_types"
 
 type Props = {
-  diplomes: Diplome[]
+  diplomes: DiplomeType[]
 }
 
 type LineProps = {
-  diplome: Diplome,
+  diplome: DiplomeType,
+  index: number,
   active_state: boolean,
   activeLine: (id: number) => void
+
 }
 
 type State = {
@@ -36,7 +31,7 @@ function Diplomes ({ diplomes }: Props){
       for( let i = 0; i < diplomes.length; i++){
         setDiplomesStates((prev) => ({
           ...prev,
-          [diplomes[i].id]: false
+          [diplomes[i]._id]: false
         }))
       }
     }
@@ -44,8 +39,8 @@ function Diplomes ({ diplomes }: Props){
     initState()
   }, [])
 
-  function activeLine(id: number) {
-    const isAlreadyActive = diplomesStates[id] === true;
+  function activeLine(index: number) {
+    const isAlreadyActive = diplomesStates[index] === true;
 
     const newState: State = {};
     for (const key in diplomesStates) {
@@ -53,7 +48,7 @@ function Diplomes ({ diplomes }: Props){
     }
 
     if (!isAlreadyActive) {
-      newState[id] = true;
+      newState[index] = true;
     }
 
     setDiplomesStates(newState);
@@ -63,7 +58,7 @@ function Diplomes ({ diplomes }: Props){
   return <ul className="diplomes-container">
     {
       diplomes.map((diplome, i) => (
-        <DiplomeLine diplome={diplome} active_state={diplomesStates[diplome.id]} activeLine={activeLine}/>
+        <DiplomeLine key={i} diplome={diplome} active_state={diplomesStates[i+1]} activeLine={activeLine} index={i+1}/>
       )) 
     }
   </ul>
@@ -71,15 +66,15 @@ function Diplomes ({ diplomes }: Props){
 
 
 
-function DiplomeLine({ diplome, active_state, activeLine }: LineProps) {
+function DiplomeLine({ diplome, active_state, activeLine, index }: LineProps) {
   const contentRef = REACT.useRef<HTMLLIElement>(null);
 
 
-  return <li key={diplome.id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: { height: "100px"}} onClick={() => activeLine(diplome.id)} ref={contentRef}>
+  return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
     <div className="diplome-information">
-      <p><strong>{diplome.ecole}</strong> - {diplome.nom_diplome}</p>
+      <p><strong>{diplome.ecole}</strong> - {diplome.diplome}</p>
 
-      <span className="active-arrow" style={{ background: colors[(diplome.id - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
+      <span className="active-arrow" style={{ background: colors[(index - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
     </div>
 
     <p className="diplome-description">

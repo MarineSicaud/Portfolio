@@ -12,6 +12,7 @@ class ImagesGestion {
   }
 
   async append_file(files: File[]): Promise<this> {
+    console.log(files)
     for ( let i = 0; i < files.length; i++ ) {
       let url = `/images/${files[i].name}`
 

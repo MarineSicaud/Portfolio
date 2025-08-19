@@ -24,7 +24,7 @@ async function GET(req: Request){
   return HttpResponse(StatusCode.NotFound)
 }
 
-type POSTProject = {
+export type POSTProject = {
   title: string,
   description: string,
   competences: Competence[],
@@ -32,7 +32,8 @@ type POSTProject = {
   client: string,
   duree: string,
   background_image: File,
-  link?: string
+  type: string, // Marketing / Logo / Branding
+  link?: string,
   content: {
     title: string,
     description?: string,
@@ -40,10 +41,6 @@ type POSTProject = {
       file: File,
       path: string
       alt: string,
-      offsetTop: number,
-      strengh: number,
-      responciveOffsetTop: number,
-      responciveStrengh: number
     }[]
   }[]
 }
@@ -58,6 +55,18 @@ async function POST(req: Request){
   // Transform image for type wanted
   // Here its's for a project
   let project = formToObject<POSTProject>(formData)
+
+  console.log(project.content[0].images)
+
+  for ( const key in project ) {
+    if ( key.includes("content.")) {
+      const splitKey = key.split(".")
+      const contentIndex = Number(splitKey[1])
+      const imageIndex = Number(splitKey[2])
+
+      project.content[contentIndex].images[imageIndex].file = project[key]
+    }
+  }
 
   // Create utilities managers
   let image_gestion = new ImagesGestion()
@@ -119,8 +128,9 @@ type PATCHProject = {
   services: string[],
   client: string,
   duree: string,
-  background_image: File,
+  background_image: File | string,
   link?: string
+  type: string,
   content: {
     title: string,
     description?: string,
@@ -144,23 +154,41 @@ async function PATCH(req: Request) {
 
   if ( !project._id ) return HttpResponse(StatusCode.NotFound)
 
+  for ( const key in project ) {
+    if ( key.includes("content.")) {
+      const splitKey = key.split(".")
+      const contentIndex = Number(splitKey[1])
+      const imageIndex = Number(splitKey[2])
+
+      project.content[contentIndex].images[imageIndex].file = project[key]
+    }
+  }
+
   let image_gestion = new ImagesGestion()
   let github_manager = new Github()
 
   let project_content_images: File[] = []
 
+  console.log(project.background_image)
+
+  if ( typeof project.background_image !== "string" ) {
+    project_content_images.push(project.background_image)
+  }
+
   if ( project.content.length > 0 ){
     for ( let i = 0; i < project.content.length; i++ ) {
       if ( project.content[i].images.length > 0 ) {
-        project.content[i].images.map(image => project_content_images.push(image.file))
+        project.content[i].images.map(image => typeof image.file !== "string" ? project_content_images.push(image.file) : null)
       }
     }
   }
 
-  let filter_image_to_push = await image_gestion.append_file([project.background_image, ...project_content_images])
+  let filter_image_to_push = await image_gestion.append_file([...project_content_images])
 
 
   let push_passed = true;
+
+  console.log(project.content[0].images)
 
 
   if ( filter_image_to_push.files.length > 0 ) {

@@ -6,10 +6,11 @@ import { FilterType } from "@/app/projets/page"
 
 type Props = {
   filter: FilterType,
-  setFilter: REACT.Dispatch<REACT.SetStateAction<FilterType>>
+  setFilter: REACT.Dispatch<REACT.SetStateAction<FilterType>>,
+  allCompetences: string[]
 }
 
-function ProjectFilter({ filter, setFilter }: Props){
+function ProjectFilter({ filter, setFilter, allCompetences }: Props){
   function handleChange(value: string, key: "type" | "competence"){
     let new_value: string | null = null
 
@@ -33,8 +34,11 @@ function ProjectFilter({ filter, setFilter }: Props){
 
     <select className="filter-select competence" value={filter.competence || ""} onChange={(e) => handleChange(e.target.value, "competence")}>
       <option value="">Competence</option>
-      <option value="Photoshop">Photoshop</option>
-      <option value="Illustrator">Illustrator</option>
+      {
+        allCompetences.map((c, i) => 
+          <option key={i} value={c}>{c}</option>
+        )
+      }
     </select>
 
   </section>

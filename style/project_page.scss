@@ -20,6 +20,7 @@
       background: vars.$background;
       border-bottom-left-radius: 50px;
       border-bottom-right-radius: 50px;
+      z-index: 99;
     }
 
     h2 {
@@ -124,7 +125,6 @@
     height: 140vh;
     position: relative;
     overflow: hidden;
-    z-index: -1;
 
     img {
       width: auto;

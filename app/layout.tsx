@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Caprasimo } from "next/font/google";
 import "../style/style.scss"
 import "../style/responcive.scss"
-import { Footer } from "@/component/global/footer";
+import FinalNavbar from "@/component/global/navbar";
 
 const caprasimo = Caprasimo({
   weight: "400",
@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${caprasimo.variable} ${poppins.variable}`}>
+        <FinalNavbar />
         {children}
       </body>
     </html>

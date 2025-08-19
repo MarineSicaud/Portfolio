@@ -12,6 +12,12 @@ class Projet {
     return projets_component
   }
 
+  static async get_component_from_project(id: string): Promise<ProjectComponent> {
+    const projets_component = await ProjetComponentModel.findOne({id_projet: new mongoose.Types.ObjectId(id)})
+
+    return projets_component
+  }
+
   // Get last projects component
   static async get_last_projets_component(length: number): Promise<ProjectComponent[]> {
     const projets_component = await ProjetComponentModel.find(
@@ -43,7 +49,7 @@ class Projet {
   static async new_project(p: Project): Promise<boolean>{
     const date = new Date()
 
-    const { title, description, background_image, services, duree, client, competences, link, content } = p
+    const { title, type, description, background_image, services, duree, client, competences, link, content } = p
 
     let content_with_image_path = content.map(c => ({
       ...c,
@@ -62,6 +68,7 @@ class Projet {
       client,
       competences,
       link,
+      type,
       content: content_with_image_path
     })
 
@@ -69,6 +76,8 @@ class Projet {
       id_projet: new_project._id,
       title,
       description,
+      type,
+      competences,
       image_url: `/images/${background_image.name}`,
       services,
       date: `${date.getUTCDate()}-${date.getUTCMonth()}-${date.getUTCFullYear()}`
@@ -95,25 +104,26 @@ class Projet {
 
   // Update project
   static async update_project(p: Project): Promise<boolean> {
-    const { _id, title, description, background_image, services, duree, client, competences, link, content } = p
+    const { _id, type, title, description, background_image, services, duree, client, competences, link, content } = p
 
     let content_with_image_path = content.map(c => ({
       ...c,
       images: c.images.map(img => ({
         ...img,
-        path: `/images/${img.file.name}`
+        path: !img.path.includes("data") ? img.path : `/images/${img.file.name}`
       }))
     }))
 
     const project_update = await ProjetModel.updateOne({ _id: new mongoose.Types.ObjectId(_id) }, {
       title,
       description,
-      background_image: `/images/${background_image.name}`,
+      background_image: typeof background_image === "string" ? background_image : `/images/${background_image.name}`,
       services,
       duree,
       client,
       competences,
       link,
+      type,
       content: content_with_image_path
     })
 
@@ -123,14 +133,17 @@ class Projet {
         title,
         description,
         services,
-        image_url: `/images/${background_image.name}`
+        image_url: typeof background_image === "string" ? background_image : `/images/${background_image.name}`,
       }
     )
 
-    if ( project_update.modifiedCount === 1 && project_component_update.modifiedCount === 1 ) {
+    console.log(project_update, project_component_update)
+
+    if (project_update.matchedCount > 0 && project_component_update.matchedCount > 0){
       return true
     }
 
+    console.log("this 404")
     return false
   }
 }

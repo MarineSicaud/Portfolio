@@ -7,6 +7,8 @@ export type ProjectComponent = {
   title: string,
   description: string,
   services: string[],
+  competences: string[],
+  type: string,
   date?: string
 }
 
@@ -27,12 +29,16 @@ export type ProjectContent = {
 export type Project = {
   _id: string,
   title: string,
+  type: string,
   description: string,
   competences: Competence[],
   services: string[],
   client: string,
   duree: string,
-  background_image: File,
-  link?: string
+  background_image: {
+    file: File,
+    path: string
+  },
+  link?: string,
   content: ProjectContent[]
 }

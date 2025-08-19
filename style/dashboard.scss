@@ -1,0 +1,132 @@
+@use "./lib/_variables.scss" as vars;
+@use "./lib/_animations.scss" as anims;
+
+
+textarea {
+  field-sizing: content;
+  min-height: 4rem;
+}
+
+.dashboard-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.dashboard-projets-container {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 200px;
+  padding: 0 5vw;
+
+  .projects-container {
+    width: 100%;
+    display: grid;
+    grid: auto / 1fr 1fr 1fr;
+    gap: 30px;
+
+    .project-component-container .image-container {
+      height: 400px
+    } 
+
+  }
+}
+
+    .new-project a, .new-comp a {
+      display: block;
+      width: calc( 90vw / 3 );
+      height: 500px;
+      background: rgba($color: vars.$black, $alpha: .3);
+      border-radius: 40px;
+      transition: .3s background;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 3%;
+        height: 20%;
+        background: vars.$background;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 3%;
+        width: 20%;
+        background: vars.$background;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        background: rgba($color: vars.$black, $alpha: .5);
+      }
+    }
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: vars.$black;
+  font-family: vars.$base-font;
+  margin-left: -10px;
+  width: fit-content !important;
+}
+
+.projet-page-header {
+  position: relative;
+}
+
+.project-type {
+  position: absolute;
+  top: 30px;
+  right: 100px;
+}
+
+.image-container input, .image input {
+  position: absolute;
+  pointer-events: all;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+  transform: translate(-50%, -50%);
+}
+
+.dashboard-competences {
+  margin-top: 150px;
+  padding: 50px 5vw;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 100px;
+  }
+}
+
+.new-comp a {
+  width: 200px;
+  height: 200px;
+}
+
+.new-competence-component {
+  margin-top: 200px;
+  padding: 100px 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}

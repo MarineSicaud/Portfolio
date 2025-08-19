@@ -5,6 +5,10 @@ const CompetenceSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  type: {
+    type: String,
+    require: true,
+  },
   image_url: {
     type: String,
     require: true

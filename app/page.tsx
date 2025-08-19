@@ -1,5 +1,3 @@
-"server side"
-
 import { Colors, Sphere } from "@/component/global/sphere";
 import "../style/homepage.scss"
 
@@ -10,13 +8,23 @@ import { Competence } from "@/component/competence";
 import { Diplomes } from "@/component/diplomes";
 import { Reviews } from "@/component/reviews";
 import { Footer } from "@/component/global/footer";
-import { HomeProject } from "@/component/home_projects";
+import { Fetching } from "@/utils/fetching";
 import { ProjectComponent } from "@/types/project_type";
+import { HomeProject } from "@/component/home_projects";
+import { CompetenceComponent } from "@/types/competences_type";
+import { DiplomeType } from "@/types/diplomes_types";
+import { ReviewType } from "@/types/review_type";
+
 
 export default async function Home() {
-  const projectsRequest = await fetch("http://127.0.0.1:3000/api/projets/components")
-  let projectsJson = await projectsRequest.json()
-  let projects = projectsJson.data as [ ProjectComponent, ProjectComponent, ProjectComponent ]
+  type ProjectNeededType = [ ProjectComponent, ProjectComponent, ProjectComponent]
+
+  let projects = await Fetching.getDatas<ProjectNeededType>("/projets/components?length=3")
+  let competences = await Fetching.getDatas<CompetenceComponent[]>("/competences")
+  let diplomes = await Fetching.getDatas<DiplomeType[]>("/diplomes")
+  let reviews = await Fetching.getDatas<ReviewType[]>("/reviews")
+
+  if ( projects === false || competences === false || reviews === false || diplomes === false ) return null
 
   const social_media = [
     {
@@ -31,58 +39,6 @@ export default async function Home() {
     }
   ]
 
-  const diplomes = [
-    {
-      id: 1,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: `J'ai choisi d'intégrer My Digital School pour développer mes compétences en marketing digital, un domaine qui me passionne profondément pour son pouvoir à transformer la visibilité et la croissance des marques. Cette formation m'a permis d'acquérir des compétences solides en marketing digital, me permettant de concevoir des stratégies efficaces et de mesurer leur impact à travers des outils et des techniques modernes. \n \n
-
-En parallèle, j'ai exploré la communication, un domaine clé pour diffuser des messages percutants et engager efficacement une audience. J'ai développé des compétences en création de contenu pour différents supports, en élaboration de stratégies de communication et en gestion des relations publiques. Cette expertise m’a sensibilisée à l’importance de l’alignement des messages, de la gestion de la réputation de marque, et de la cohérence dans l’ensemble des actions de communication pour instaurer une relation de confiance et favoriser l’engagement. \n \n
-
-Grâce à cette double compétence, je suis désormais capable de coordonner efficacement des projets digitaux, en combinant stratégie marketing et design graphique, pour offrir des résultats créatifs et performants, tout en garantissant des livrables de qualité qui répondent aux besoins des clients et utilisateurs.`
-    },
-    {
-      id: 2,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: "oui"
-    },
-    {
-      id: 3,
-      ecole: "MDS",
-      nom_diplome: "testing",
-      description: "oui"
-    },
-  ]
-
-
-  let reviews = [
-    {
-      id: 1,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-    },
-    {
-      id: 2,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-      job: "Testeur de site internet"
-    },
-    {
-      id: 3,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-    },
-    {
-      id: 4,
-      name: "Theo Derive",
-      review: "Je fais une review de teste afin de savoir si ce que je fais c'est quelque chose de relativement styler ou non",
-      job: "Testeur de site internet"
-    },
-  ]
-
-
   return (
     <>
       <Sphere
@@ -95,7 +51,7 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
           width: 800,
           height: 800
         }}
-        sphere={{
+       sphere={{
           top: -200,
           left: "unset",
           bottom: "unset",
@@ -171,7 +127,7 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
       </section>
 
       <HomeProject projects={projects} />
-
+      
       <section className="categories-homepage">
         <div className="slider-container" style={{ rotate: "-2deg" }}>
           <div className="slider right">
@@ -281,20 +237,20 @@ Grâce à cette double compétence, je suis désormais capable de coordonner eff
       <section className="homepage-competences-container">
         <SectionTitle text="Mes Competences" color={Colors.Violet} />
 
-        <section className="competences-design-container">
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+        <section className="competences-marketing-container">
+          {
+            competences.map(competence => competence.type === "Marketing" &&
+              <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
+            )
+          }
         </section>
 
-        <section className="competences-marketing-container">
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
-          <Competence name="Photoshop" image_url="/images/photoshop-logo.png" />
+        <section className="competences-design-container">
+          {
+            competences.map(competence => competence.type === "Design" &&
+              <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
+            )
+          }
         </section>
       </section>
 

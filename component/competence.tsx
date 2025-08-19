@@ -2,12 +2,14 @@ import Image from "next/image"
 import Link from "next/link"
 
 type Props = {
+  id?: string,
   image_url: string,
-  name: string 
+  name: string,
+  dashboard?: boolean
 }
 
-function Competence({ image_url, name }: Props){
-  return <Link href={`/projets?competence=${name}`} className="competence-component">
+function Competence({ id, image_url, name, dashboard = false }: Props){
+  return <Link href={dashboard ? `/dashboard/competences/${id}` :`/projets?competence=${name}`} className="competence-component">
     <Image
       alt={`logo de ${name}`}
       src={image_url}
