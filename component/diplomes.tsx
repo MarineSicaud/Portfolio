@@ -3,12 +3,16 @@
 import * as REACT from "react"
 import { Colors } from "./global/sphere"
 import { DiplomeType } from "@/types/diplomes_types"
+import Link from "next/link"
+import { Fetching } from "@/utils/fetching"
 
 type Props = {
+  dashboard: boolean,
   diplomes: DiplomeType[]
 }
 
 type LineProps = {
+  dashboard: boolean,
   diplome: DiplomeType,
   index: number,
   active_state: boolean,
@@ -22,7 +26,7 @@ type State = {
 
 const colors = [Colors.Rose, Colors.Orange, Colors.Violet]
 
-function Diplomes ({ diplomes }: Props){
+function Diplomes ({ diplomes, dashboard = false }: Props){
   const [diplomesStates, setDiplomesStates] = REACT.useState<State>({})
 
   // Init diplomes State to update state of active diplomes or no
@@ -58,7 +62,7 @@ function Diplomes ({ diplomes }: Props){
   return <ul className="diplomes-container">
     {
       diplomes.map((diplome, i) => (
-        <DiplomeLine key={i} diplome={diplome} active_state={diplomesStates[i+1]} activeLine={activeLine} index={i+1}/>
+        <DiplomeLine key={i} diplome={diplome} dashboard={dashboard} active_state={diplomesStates[i+1]} activeLine={activeLine} index={i+1}/>
       )) 
     }
   </ul>
@@ -66,13 +70,18 @@ function Diplomes ({ diplomes }: Props){
 
 
 
-function DiplomeLine({ diplome, active_state, activeLine, index }: LineProps) {
+function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: LineProps) {
   const contentRef = REACT.useRef<HTMLLIElement>(null);
 
+  async function deleteDiplome(){
+    if ( dashboard ) {
+      await Fetching.deleteDatas("/diplomes", diplome._id)
+    }
+  }
 
   return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
     <div className="diplome-information">
-      <p><strong>{diplome.ecole}</strong> - {diplome.diplome}</p>
+      <p><strong>{diplome.ecole}</strong> - {diplome.diplome} { dashboard && <span> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button onClick={() => deleteDiplome()}>Supprimer</button> </span> } </p>
 
       <span className="active-arrow" style={{ background: colors[(index - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
     </div>
@@ -83,4 +92,4 @@ function DiplomeLine({ diplome, active_state, activeLine, index }: LineProps) {
   </li>
 }
 
-export { Diplomes }
+export { Diplomes, DiplomeLine }

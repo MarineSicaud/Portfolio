@@ -11,6 +11,7 @@ import { Skills } from "@/component/skills"
 import { Fetching } from "@/utils/fetching"
 import { DiplomeType } from "@/types/diplomes_types"
 import { Diplomes } from "@/component/diplomes"
+import { SectionTitle } from "@/component/global/sectionTitle"
 
 
 export default async function Profil(){

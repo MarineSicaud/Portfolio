@@ -2,6 +2,7 @@ import { Competence } from "@/component/competence"
 import { Fetching } from "@/utils/fetching"
 
 import "@/style/dashboard.scss"
+import Link from "next/link"
 
 async function DashboardCompetences(){
   type CompetenceType = {
@@ -24,8 +25,10 @@ async function DashboardCompetences(){
   <ul>
   {
     competences.map((c) => 
-      <li>
+      <li key={c._id}>
+        <Link href={`/dashboard/competences/${c._id}`}>
          <Competence name={c.name} key={c._id} image_url={c.image_url} id={c._id} dashboard={true}/>
+        </Link>
 
 
       <form action={deleteComp}>

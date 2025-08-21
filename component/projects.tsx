@@ -41,7 +41,7 @@ function Projects( { projects } : Props) {
     }
 
     return finalProjects.map(( projet, i ) => 
-      <Project project={projet} updating={false}/>
+      <Project key={i} project={projet} updating={false}/>
     )
   }
 

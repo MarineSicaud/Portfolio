@@ -36,7 +36,7 @@ function HomeProject({ projects }: { projects: [ProjectComponent, ProjectCompone
     <ul className="projects-slider" style={{ transform: `translateX(-${sliderIndex * 36 }%)` }}>
       {
         projects.map((project) => (
-          <Project project={project} updating={false}/>
+          <Project key={project.id_projet} project={project} updating={false}/>
         ))
       }
     </ul>
