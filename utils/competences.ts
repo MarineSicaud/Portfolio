@@ -1,18 +1,18 @@
 import mongoose from "mongoose"
 
 import CompetenceModel from "@/models/CompetenceModel"
-import { Competence, NewCompetence } from "@/types/competences_type"
+import { F_CompetenceComponentType, B_NewCompetenceType, B_CompetenceType } from "@/types/competences_type"
 
 class Competences {
   // Get competences
-  static async get_all_competences(): Promise<Competence[]>{
+  static async get_all_competences(): Promise<F_CompetenceComponentType[]>{
     let competences = await CompetenceModel.find({})
 
     return competences
   }
 
   // Get one competence
-  static async get_competence(id: string): Promise<Competence>{
+  static async get_competence(id: string): Promise<F_CompetenceComponentType>{
     let competence = await CompetenceModel.findOne({ _id: new mongoose.Types.ObjectId(id)})
 
     return competence
@@ -20,7 +20,7 @@ class Competences {
 
 
   // New competence
-  static async new_competence(c: NewCompetence): Promise<boolean>{
+  static async new_competence(c: B_NewCompetenceType): Promise<boolean>{
     const { image, type, name } = c
 
     const new_comp = await CompetenceModel.create({
@@ -38,7 +38,7 @@ class Competences {
 
 
   // Update competence
-  static async update_competence(c: Competence): Promise<boolean> {
+  static async update_competence(c: B_CompetenceType): Promise<boolean> {
     const { _id, name, type, image } = c
 
     const update_comp = await CompetenceModel.updateOne({ _id: new mongoose.Types.ObjectId(_id) }, {
@@ -47,7 +47,7 @@ class Competences {
       image_url: typeof image === "string" ? image : `/images/${image.name}`
     })
 
-    if ( update_comp.modifiedCount === 1 ) return true
+    if ( update_comp.matchedCount > 0 ) return true
 
     return false
   }

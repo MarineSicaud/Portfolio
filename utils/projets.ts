@@ -2,24 +2,24 @@ import mongoose from "mongoose"
 
 import ProjetComponentModel from "@/models/ProjetComponentModel"
 import ProjetModel from "@/models/ProjetModel"
-import { Project, ProjectComponent } from "@/types/project_type"
+import { F_ProjectComponentType, F_ProjectType, B_ProjectType } from "@/types/project_type"
 
 class Projet {
   // Get all projects component
-  static async get_all_projets_component(): Promise<ProjectComponent[]> {
+  static async get_all_projets_component(): Promise<F_ProjectComponentType[]> {
     const projets_component = await ProjetComponentModel.find({})
 
     return projets_component
   }
 
-  static async get_component_from_project(id: string): Promise<ProjectComponent> {
+  static async get_component_from_project(id: string): Promise<F_ProjectComponentType> {
     const projets_component = await ProjetComponentModel.findOne({id_projet: new mongoose.Types.ObjectId(id)})
 
     return projets_component
   }
 
   // Get last projects component
-  static async get_last_projets_component(length: number): Promise<ProjectComponent[]> {
+  static async get_last_projets_component(length: number): Promise<F_ProjectComponentType[]> {
     const projets_component = await ProjetComponentModel.find(
       {},
       {},
@@ -38,7 +38,7 @@ class Projet {
   }
 
   // Get one project
-  static async get_project(id: string): Promise<Project> {
+  static async get_project(id: string): Promise<F_ProjectType> {
     const project = await ProjetModel.findOne({ _id: new mongoose.Types.ObjectId(id) })
 
     return project
@@ -46,10 +46,10 @@ class Projet {
 
 
   // New project
-  static async new_project(p: Project): Promise<boolean>{
+  static async new_project(p: B_ProjectType): Promise<boolean>{
     const date = new Date()
 
-    const { title, type, description, background_image, services, duree, client, competences, link, content } = p
+    const { title, type, description, background_image, services, duree, client, link, content } = p
 
     let content_with_image_path = content.map(c => ({
       ...c,
@@ -66,7 +66,6 @@ class Projet {
       services,
       duree,
       client,
-      competences,
       link,
       type,
       content: content_with_image_path
@@ -77,7 +76,6 @@ class Projet {
       title,
       description,
       type,
-      competences,
       image_url: `/images/${background_image.name}`,
       services,
       date: `${date.getUTCDate()}-${date.getUTCMonth()}-${date.getUTCFullYear()}`
@@ -104,7 +102,7 @@ class Projet {
 
   // Update project
   static async update_project(p: Project): Promise<boolean> {
-    const { _id, type, title, description, background_image, services, duree, client, competences, link, content } = p
+    const { _id, type, title, description, background_image, services, duree, client, link, content } = p
 
     let content_with_image_path = content.map(c => ({
       ...c,
@@ -121,7 +119,6 @@ class Projet {
       services,
       duree,
       client,
-      competences,
       link,
       type,
       content: content_with_image_path
@@ -137,13 +134,10 @@ class Projet {
       }
     )
 
-    console.log(project_update, project_component_update)
-
     if (project_update.matchedCount > 0 && project_component_update.matchedCount > 0){
       return true
     }
 
-    console.log("this 404")
     return false
   }
 }

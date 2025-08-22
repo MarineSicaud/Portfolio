@@ -1,3 +1,7 @@
+//
+// ------ Backend | Front End -----
+//
+
 export type ReviewType = {
   _id: string,
   name: string,

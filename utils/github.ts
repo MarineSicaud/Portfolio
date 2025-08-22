@@ -4,7 +4,7 @@ import "dotenv/config"
 class Github {
   private repoOwner = "WhoamiUnderscore"
   private repoName = "Marine-Portfolio"
-  private branch = "dev" // todo: Mettre main quand projet fait
+  private branch = "dev" // TODO: Mettre main quand projet fait
   private githubToken = process.env.GITHUB_CONNECTION
 
   private headers = {
@@ -125,7 +125,6 @@ class Github {
       return true
     }
 
-    console.log(pushCommit)
     return false
   }
 }

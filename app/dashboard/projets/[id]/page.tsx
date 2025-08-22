@@ -1,6 +1,6 @@
 "use client"
 
-import { Project, ProjectContent } from "@/types/project_type"
+import { Project, ProjectContent, B_ProjectType } from "@/types/project_type"
 import * as React from "react"
 
 import "@/style/project_page.scss"
@@ -32,7 +32,6 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
     _id: "",
     title: "",
     description: "",
-    competences: [],
     services: [],
     type: "",
     background_image: {
@@ -55,7 +54,6 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
       background_image: projet.background_image.file,
       content: projet.content,
       client: projet.client,
-      competences: [],
       duree: projet.duree,
       type: projet.type,
       link: projet.link
@@ -68,14 +66,16 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
       if ( typeof projet.background_image === "string") {
         newProject.background_image = projet.background_image
       }
-    const updateProjet = await Fetching.patchDatas<POSTProject>("/projets", newProject)
+
+      console.log("Updating project.... : ", newProject)
+      const updateProjet = await Fetching.patchDatas<POSTProject>("/projets", newProject)
     }
   }
 
   React.useEffect(() => {
     async function  getProjet(){
-      const projet = await Fetching.getDatas<Project>(`/projets?id=${id}`)
-      console.log(projet)
+      const projet = await Fetching.getDatas<B_ProjectType>(`/projets?id=${id}`)
+
       if ( projet === false ) return 
 
       setProjet(projet)
@@ -86,8 +86,6 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
     }
   }, [id])
 
-
-  React.useEffect(() => console.log(projet), [projet])
 
   return <>
       <section className="projet-page-header">

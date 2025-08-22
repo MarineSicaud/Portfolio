@@ -7,7 +7,7 @@ import Link from "next/link"
 import { Fetching } from "@/utils/fetching"
 
 type Props = {
-  dashboard: boolean,
+  dashboard?: boolean,
   diplomes: DiplomeType[]
 }
 
@@ -81,7 +81,12 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
 
   return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
     <div className="diplome-information">
-      <p><strong>{diplome.ecole}</strong> - {diplome.diplome} { dashboard && <span> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button onClick={() => deleteDiplome()}>Supprimer</button> </span> } </p>
+      <p>
+        <strong>{diplome.ecole}</strong> - {diplome.diplome} 
+        { 
+          dashboard && <span> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button onClick={() => deleteDiplome()}>Supprimer</button> </span> 
+        } 
+      </p>
 
       <span className="active-arrow" style={{ background: colors[(index - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
     </div>

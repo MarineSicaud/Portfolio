@@ -9,35 +9,20 @@ import { Diplomes } from "@/component/diplomes";
 import { Reviews } from "@/component/reviews";
 import { Footer } from "@/component/global/footer";
 import { Fetching } from "@/utils/fetching";
-import { ProjectComponent } from "@/types/project_type";
+import { F_ProjectComponentType } from "@/types/project_type";
 import { HomeProject } from "@/component/home_projects";
-import { CompetenceComponent } from "@/types/competences_type";
+import { F_CompetenceComponentType } from "@/types/competences_type";
 import { DiplomeType } from "@/types/diplomes_types";
 import { ReviewType } from "@/types/review_type";
 
 
 export default async function Home() {
-  type ProjectNeededType = [ ProjectComponent, ProjectComponent, ProjectComponent]
-
-  let projects = await Fetching.getDatas<ProjectNeededType>("/projets/components?length=3")
-  let competences = await Fetching.getDatas<CompetenceComponent[]>("/competences")
+  let projects = await Fetching.getDatas<F_ProjectComponentType[]>("/projets/components?length=3")
+  let competences = await Fetching.getDatas<F_CompetenceComponentType[]>("/competences")
   let diplomes = await Fetching.getDatas<DiplomeType[]>("/diplomes")
   let reviews = await Fetching.getDatas<ReviewType[]>("/reviews")
 
   if ( projects === false || competences === false || reviews === false || diplomes === false ) return null
-
-  const social_media = [
-    {
-      id: 0,
-      name: "Linkedin",
-      link: "https://www.linkedin.com/in/marine-sicaud/"
-    },
-    {
-      id: 1,
-      name: "Gmail",
-      link: "mailto:sicaud.marine.pro@gmail.com"
-    }
-  ]
 
   return (
     <>
@@ -131,30 +116,14 @@ export default async function Home() {
       <section className="categories-homepage">
         <div className="slider-container" style={{ rotate: "-2deg" }}>
           <div className="slider right">
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
+            {
+              Array.from({ length: 10 }).map((_, i) => <span key={i}>PROJETS</span>)
+            }
           </div>
           <div className="slider right">
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
+            {
+              Array.from({ length: 10 }).map((_, i) => <span key={i}>PROJETS</span>)
+            }
           </div>
         </div>
 
@@ -206,30 +175,14 @@ export default async function Home() {
 
         <div className="slider-container" style={{ rotate: "2deg" }}>
           <div className="slider left">
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
+            {
+              Array.from({ length: 10 }).map((_, i) => <span key={i}>PROJETS</span>)
+            }
           </div>
           <div className="slider left">
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
-            <span>PROJETS</span>
+            {
+              Array.from({ length: 10 }).map((_, i) => <span key={i}>PROJETS</span>)
+            }
           </div>
         </div>
       </section>
@@ -266,7 +219,7 @@ export default async function Home() {
       </section>
 
 
-      <Footer social_media={social_media} />
+      <Footer />
     </>
   );
 }

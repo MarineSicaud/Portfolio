@@ -133,7 +133,6 @@ function Skills() {
         {
           transform: `translate(-50%, -50%) rotate(${skills[i].position.deg}deg)`,
           duration: 1,
-          delay: 1,
           ease: "bounce.out"
         }
       )

@@ -50,7 +50,7 @@ class Review {
       }
     )
 
-    if ( updating_review.modifiedCount === 1 ) {
+    if ( updating_review.matchedCount > 0 ) {
       return true
     }
 

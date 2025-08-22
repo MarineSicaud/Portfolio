@@ -1,8 +1,7 @@
 "use client"
 
 import * as REACT from "react"
-
-import { FilterType } from "@/app/projets/page"
+import { FilterType } from "./all_projects"
 
 type Props = {
   filter: FilterType,

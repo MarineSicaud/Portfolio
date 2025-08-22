@@ -1,19 +1,27 @@
-export type Competence = {
+//
+// ------ Backend End -----
+//
+
+export type B_CompetenceType = {
   _id: string,
   name: string,
-  type: string, // Marketing / Design
+  type: "Marketing" | "Design", 
+  image: File | string
+}
+
+export type B_NewCompetenceType = {
+  name: string,
+  type: "Marketing" | "Design", 
   image: File
 }
 
-export type NewCompetence = {
-  name: string,
-  type: string, // Marketing / Design
-  image: File
-}
+//
+// ------ Frontend End -----
+//
 
-export type CompetenceComponent = {
+export type F_CompetenceComponentType = {
   _id: string,
-  type: string, // Marketing / Design
+  type: "Marketing" | "Design", 
   name: string,
   image_url: string
 }

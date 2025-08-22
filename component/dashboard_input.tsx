@@ -1,17 +1,16 @@
-import { Project } from "@/types/project_type"
 import React from "react"
 
 type Props = {
   value: string,
   setValueKey: string,
-  setValue: React.Dispatch<React.SetStateAction<Project>>,
+  setValue: React.Dispatch<React.SetStateAction<any>>,
   fontSize: number,
   style?: Object
 }
 
 function DashboardInput({ value, style, setValue, fontSize, setValueKey }: Props){
   function update(value: string) {
-    setValue((prev) => ({
+    setValue((prev: any) => ({
       ...prev,
       [setValueKey]: value
     }))

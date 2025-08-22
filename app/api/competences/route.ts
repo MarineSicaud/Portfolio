@@ -1,4 +1,4 @@
-import { Competence, NewCompetence } from "@/types/competences_type";
+import { B_CompetenceType, B_NewCompetenceType } from "@/types/competences_type";
 import { StatusCode } from "@/types/http_response_type";
 import { Competences } from "@/utils/competences";
 import { ImagesGestion } from "@/utils/file";
@@ -13,14 +13,13 @@ async function GET(req: Request){
   const { searchParams } = new URL(req.url)
   let id = searchParams.get("id") || undefined
 
-  let competences: Competence | Competence[]
+  let competences: B_CompetenceType | B_CompetenceType[]
 
   if ( id ) {
     competences = await Competences.get_competence(id)
   } else {
     competences = await Competences.get_all_competences()
   }
-
 
   if ( !competences || Array.isArray(competences) && competences.length === 0 ) {
     return HttpResponse(StatusCode.NotFound)
@@ -33,7 +32,7 @@ async function POST(req: Request){
   await connectionToDatabase()
 
   let formData = await req.formData()
-  let competence = formToObject<NewCompetence>(formData)
+  let competence = formToObject<B_NewCompetenceType>(formData)
 
 
   let image_gestion = new ImagesGestion()
@@ -68,8 +67,7 @@ async function PATCH(req: Request) {
   await connectionToDatabase()
 
   let formData = await req.formData()
-  let competence = formToObject<Competence>(formData)
-  console.log(competence)
+  let competence = formToObject<B_CompetenceType>(formData)
 
   if ( !competence._id ) return HttpResponse(StatusCode.UnAuthorized)
 

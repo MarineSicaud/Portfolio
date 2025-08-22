@@ -1,6 +1,6 @@
 "use client"
 
-import { ResponsiveValues, usePage, usePageReturn } from "@/hooks/usePage"
+import { ResponsiveValues, usePage } from "@/hooks/usePage"
 
 import * as React from "react"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"

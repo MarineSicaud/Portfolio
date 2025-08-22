@@ -2,17 +2,22 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
-type Props = {
-  social_media: {
-    id: number,
-    name: string,
-    link: string
-  }[]
-}
 
-
-function Footer({ social_media }: Props){
+function Footer(){
   const colors = ["rose", "orange", "violet"]
+
+  const social_media = [
+    {
+      id: 0,
+      name: "Linkedin",
+      link: "https://www.linkedin.com/in/marine-sicaud/"
+    },
+    {
+      id: 1,
+      name: "Gmail",
+      link: "mailto:sicaud.marine.pro@gmail.com"
+    }
+  ]
 
   return <footer>
     <p className="footer-title">Travaillons <span style={{color: "#F874D8"}}>Ensemble</span> !</p>

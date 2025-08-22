@@ -1,3 +1,7 @@
+//
+// ------ Backend | Front End -----
+//
+
 export type DiplomeType = {
    _id: string,
   ecole: string,

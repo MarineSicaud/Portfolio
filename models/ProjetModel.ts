@@ -9,10 +9,6 @@ const ProjetSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  competences: {
-    type: Array,
-    require: true
-  },
   services: {
     type: Array,
     require: true

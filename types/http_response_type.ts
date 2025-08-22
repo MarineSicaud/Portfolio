@@ -2,6 +2,7 @@ import { Competence } from "./competences_type";
 import { DiplomeType } from "./diplomes_types";
 import { Project, ProjectComponent } from "./project_type";
 import { ReviewType } from "./review_type";
+
 export enum StatusCode {
   // 2--
   Success = 200,
@@ -18,4 +19,4 @@ export enum StatusCode {
   InternalError = 500
 }
 
-export type HttpResponseDataParam = ProjectComponent[] | Project | Competence | Competence[] | DiplomeType | DiplomeType[] | ReviewType | ReviewType[]
+export type B_HttpResponseDataParam = ProjectComponent[] | Project | Competence | Competence[] | DiplomeType | DiplomeType[] | ReviewType | ReviewType[]

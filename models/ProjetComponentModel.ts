@@ -21,10 +21,6 @@ const ProjetComponentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  competences: {
-    type: Array,
-    require: true
-  },
   services: {
     type: Array,
     require: true
@@ -33,10 +29,6 @@ const ProjetComponentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  id_project: {
-    type: String,
-    require: true,
-  }
 }, { strict: true })
 
 export default mongoose.models["projets_component"] || mongoose.model("projets_component", ProjetComponentSchema)

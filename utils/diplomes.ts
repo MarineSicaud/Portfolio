@@ -48,7 +48,7 @@ class Diplome {
       }
     )
 
-    if ( update.modifiedCount === 1 ) return true
+    if ( update.matchedCount > 0 ) return true
 
     return false
   }

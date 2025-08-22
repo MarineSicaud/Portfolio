@@ -1,6 +1,5 @@
-import { Competence } from "@/types/competences_type";
 import { StatusCode } from "@/types/http_response_type";
-import { Project } from "@/types/project_type";
+import { B_ProjectType } from "@/types/project_type";
 import { ImagesGestion } from "@/utils/file";
 import { formToObject } from "@/utils/formToObject";
 import { Github } from "@/utils/github";
@@ -18,31 +17,9 @@ async function GET(req: Request){
 
   const project = await Projet.get_project(id)
 
-
   if ( project ) return HttpResponse(StatusCode.Success, project)
 
   return HttpResponse(StatusCode.NotFound)
-}
-
-export type POSTProject = {
-  title: string,
-  description: string,
-  competences: Competence[],
-  services: string[],
-  client: string,
-  duree: string,
-  background_image: File,
-  type: string, // Marketing / Logo / Branding
-  link?: string,
-  content: {
-    title: string,
-    description?: string,
-    images: {
-      file: File,
-      path: string
-      alt: string,
-    }[]
-  }[]
 }
 
 async function POST(req: Request){
@@ -54,10 +31,10 @@ async function POST(req: Request){
 
   // Transform image for type wanted
   // Here its's for a project
-  let project = formToObject<POSTProject>(formData)
+  let project = formToObject<B_ProjectType>(formData)
 
-  console.log(project.content[0].images)
-
+  // Get independants images
+  // And reassigned them in there content.images.file
   for ( const key in project ) {
     if ( key.includes("content.")) {
       const splitKey = key.split(".")
@@ -68,10 +45,11 @@ async function POST(req: Request){
     }
   }
 
-  // Create utilities managers
   let image_gestion = new ImagesGestion()
   let github_manager = new Github()
 
+  // Return an error if the background file is not an image
+  if ( typeof project.background_image === "string" ) return HttpResponse(StatusCode.ConflicWithServer)
 
   // add all images in an array to properly send it to the ImageGestion
   let project_content_images: File[] = []
@@ -120,37 +98,11 @@ async function POST(req: Request){
   return HttpResponse(StatusCode.InternalError)
 }
 
-type PATCHProject = {
-  _id: string,
-  title: string,
-  description: string,
-  competences: Competence[],
-  services: string[],
-  client: string,
-  duree: string,
-  background_image: File | string,
-  link?: string
-  type: string,
-  content: {
-    title: string,
-    description?: string,
-    images: {
-      file: File,
-      path: string
-      alt: string,
-      offsetTop: number,
-      strengh: number,
-      responciveOffsetTop: number,
-      responciveStrengh: number
-    }[]
-  }[]
-}
-
 async function PATCH(req: Request) {
   await connectionToDatabase()
 
   let formData = await req.formData()
-  let project = formToObject<PATCHProject>(formData)
+  let project = formToObject<B_ProjectType>(formData)
 
   if ( !project._id ) return HttpResponse(StatusCode.NotFound)
 
@@ -169,10 +121,8 @@ async function PATCH(req: Request) {
 
   let project_content_images: File[] = []
 
-  console.log(project.background_image)
-
   if ( typeof project.background_image !== "string" ) {
-    project_content_images.push(project.background_image)
+    project_content_images.push(project.background_image.file)
   }
 
   if ( project.content.length > 0 ){
@@ -187,8 +137,6 @@ async function PATCH(req: Request) {
 
 
   let push_passed = true;
-
-  console.log(project.content[0].images)
 
 
   if ( filter_image_to_push.files.length > 0 ) {

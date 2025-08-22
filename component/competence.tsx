@@ -1,12 +1,11 @@
 import Image from "next/image"
 
 type Props = {
-  id?: string,
   image_url: string,
   name: string,
 }
 
-function Competence({ id, image_url, name }: Props){
+function Competence({ image_url, name }: Props){
   return <div className="competence-component">
     <Image
       alt={`logo de ${name}`}

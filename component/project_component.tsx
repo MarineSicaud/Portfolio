@@ -1,12 +1,12 @@
 "use client"
 
-import { ProjectComponent } from "@/types/project_type";
+import { F_ProjectComponentType } from "@/types/project_type";
 
 import Image from "next/image";
 import Link from "next/link";
 import * as REACT from "react"
 
-function Project({ project, updating }: { project: ProjectComponent, updating: boolean }) {
+function ProjectComponent({ project, updating }: { project: F_ProjectComponentType, updating: boolean }) {
   const [position, setPosition] = REACT.useState({
     top: 0,
     left: 0
@@ -64,8 +64,7 @@ function Project({ project, updating }: { project: ProjectComponent, updating: b
 
     <p>{project.description}</p>
 
-
   </Link>
 }
 
-export { Project }
+export { ProjectComponent }

@@ -79,28 +79,15 @@ export default async function Profil(){
     <section className="vision-profil-page-container">
       <div className="slider-container" style={{ rotate: "-2deg" }}>
         <div className="slider right">
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
+          {
+            Array.from({ length: 10 }).map((_, i) => <span key={i}>MA VISION</span>)
+          }
         </div>
+
         <div className="slider right">
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
-          <span>MA VISION</span>
+          {
+            Array.from({ length: 10 }).map((_, i) => <span key={i}>MA VISION</span>)
+          }
         </div>
       </div>
 
@@ -421,6 +408,6 @@ export default async function Profil(){
       <Diplomes diplomes={diplomes} />
     </section>
 
-    <Footer social_media={social_media} />
+    <Footer />
   </>
 }
