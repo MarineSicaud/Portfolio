@@ -12,14 +12,16 @@ import { Fetching } from "@/utils/fetching"
 import Link from "next/link"
 
 export default function ProjectPage({ params }: { params: Promise<{ id: string }>}){
-  const [projet, setProjet] = REACT.useState<Project>()
-  const infoPage = usePage()
-  const { id } = REACT.use(params)
+    const [projet, setProjet] = REACT.useState<Project>();
+    const infoPage = usePage();
+    const { id } = REACT.use(params);
 
 
   REACT.useEffect(() => {
-    Parallax.bind()
-  }, [])
+    if ( !projet || !projet.background_image) return
+
+    const parallax = Parallax.bind();
+  }, [projet])
 
   REACT.useEffect(() => {
     async function getProject(){
@@ -64,13 +66,13 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
       <ul>
       <li>Service</li>
       {
-        projet.services.map((service, i) => (
-          <li key={i}>{service}</li>
-        ))
+          projet.services.map((service, i) => (
+                      <li key={i}>{service}</li>
+                      ))
       }
       </ul>
 
-      <ul>
+          <ul>
       <li>Duree</li>
       <li>{projet.duree}</li>
       </ul>
@@ -114,6 +116,8 @@ function ProjectInformations( { projet, infoPage }: { projet: ProjectContent, in
   let count = projet.images.length
   let next: null | number = null
 
+  console.log(infoPage.responsiveInfo)
+
   return <section className="projet-information">
   <section className="information-container">
   <h2>{projet.title}</h2>
@@ -137,8 +141,8 @@ function ProjectInformations( { projet, infoPage }: { projet: ProjectContent, in
           src={image.path}
           width={1980}
           height={1080}
-          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Laptop ? image.strengh : image.responciveStrengh}
-          data-offset={infoPage.responsiveInfo === ResponsiveValues.Laptop ? image.offsetTop : image.responciveOffsetTop}
+          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 7 : 15}
+          data-offset={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 0 : 0}
           />
           </li>
           <li className="image">
@@ -146,8 +150,8 @@ function ProjectInformations( { projet, infoPage }: { projet: ProjectContent, in
           alt={projet.images[i + 1].alt}
           src={projet.images[i + 1].path}
           width={1980}
-          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Laptop ? projet.images[i + 1].strengh : projet.images[i + 1].responciveStrengh}
-          data-offset={infoPage.responsiveInfo === ResponsiveValues.Laptop ? projet.images[i + 1].offsetTop : projet.images[i + 1].responciveOffsetTop}
+          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 7 : 15}
+          data-offset={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 0 : 0}
           height={1080}
           />
           </li>
@@ -161,8 +165,8 @@ function ProjectInformations( { projet, infoPage }: { projet: ProjectContent, in
           src={image.path}
           width={1980}
           height={1080}
-          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Laptop ? image.strengh : image.responciveStrengh}
-          data-offset={infoPage.responsiveInfo === ResponsiveValues.Laptop ? image.offsetTop : image.responciveOffsetTop}
+          data-parallax={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 7 : 10}
+          data-offset={infoPage.responsiveInfo === ResponsiveValues.Mobile ? 0 : 0}
           />
           </li>
           </ul>
