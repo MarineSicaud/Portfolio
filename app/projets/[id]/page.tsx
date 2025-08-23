@@ -68,7 +68,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
           {
             projet.link &&
               <Link
-                href={projet.duree}
+                href={projet.link}
                 target="_blank"
               >Lien pour visualiser <span className="arrow"></span></Link>
           }

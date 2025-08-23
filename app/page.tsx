@@ -190,21 +190,29 @@ export default async function Home() {
       <section className="homepage-competences-container">
         <SectionTitle text="Mes Competences" color={Colors.Violet} />
 
-        <section className="competences-marketing-container">
-          {
-            competences.map(competence => competence.type === "Marketing" &&
-              <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
-            )
-          }
-        </section>
+        {
+          competences.filter((c) => c.type === "Marketing" ).length > 0 ?
+            <section className="competences-marketing-container">
+              {
+                competences.map(competence => competence.type === "Marketing" &&
+                  <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
+                )
+              }
+            </section>
+            : null
+        }
 
-        <section className="competences-design-container">
-          {
-            competences.map(competence => competence.type === "Design" &&
-              <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
-            )
-          }
-        </section>
+        {
+          competences.filter((c) => c.type === "Design" ).length > 0 ?
+            <section className="competences-design-container">
+              {
+                competences.map(competence => competence.type === "Design" &&
+                  <Competence key={competence._id} name={competence.name} image_url={competence.image_url} />
+                )
+              }
+            </section>
+            : null
+        }
       </section>
 
       <section className="homepage-diplomes-container">

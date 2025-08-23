@@ -333,6 +333,7 @@ nav {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-left: 20px;
 
   .diplome-container {
     width: 100%;
@@ -415,6 +416,7 @@ nav {
 
     .review-container {
       max-width: 700px;
+      min-width: 500px;
       height: 100%;
       display: flex;
       flex-direction: column;

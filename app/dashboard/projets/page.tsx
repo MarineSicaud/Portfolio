@@ -1,11 +1,11 @@
-import { Project } from "@/component/project"
+import { ProjectComponent } from "@/component/project_component"
 import "@/style/dashboard.scss"
-import { ProjectComponent } from "@/types/project_type"
+import { F_ProjectComponentType } from "@/types/project_type"
 import { Fetching } from "@/utils/fetching"
 import Link from "next/link"
 
 async function DashboardProjets(){
-  const projets = await Fetching.getDatas<ProjectComponent[]>("/projets/components")
+  const projets = await Fetching.getDatas<F_ProjectComponentType[]>("/projets/components")
   
   if ( !projets ) return null
 
@@ -13,16 +13,17 @@ async function DashboardProjets(){
     "use server"
     const id = formData.get("id");
 
-    const removeProject = await Fetching.deleteDatas("/projets", id) 
+    if ( !id ) return
+
+    const removeProject = await Fetching.deleteDatas("/projets", id as string) 
   }
 
   return <section className="dashboard-projets-container">
-
   <ul className="projects-container">
   {
     projets.map((projet, i) => (
       <li key={i}>
-      <Project project={projet} updating={true} />
+      <ProjectComponent project={projet} updating={true} />
 
       <form action={deleteProject}>
       <input type="hidden" name="id" value={projet.id_projet} />

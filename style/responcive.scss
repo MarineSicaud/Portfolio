@@ -339,8 +339,8 @@
     }
 
     .projects-slider {
+      justify-content: flex-start !important;
       padding-left: 15px;
-      padding-top: 80px;
       width: 350% !important;
       gap: 130px !important;
       transition: transform .3s;
@@ -353,7 +353,6 @@
     font-size: 2rem !important;
     flex-wrap: wrap;
   }
-
 
   // Categories
   .categories-homepage {
@@ -394,7 +393,7 @@
   .homepage-competences-container {
     gap: 70px !important;
     padding-top: 100px !important;
-    padding-bottom: 100px !important;
+    padding-bottom: 50px !important;
 
     .competences-design-container, .competences-marketing-container {
       gap: 30px;
@@ -411,11 +410,14 @@
 
   .reviews-container {
     .right-arrow {
+      top: -50%;
       right: 0 !important;
     }
 
     .left-arrow {
-      left: -20px !important;
+      top: -50%;
+      right: 15%;
+      left: unset !important;
     }
   }
 
@@ -424,8 +426,9 @@
   }
 
   .review-container {
-    max-width: unset !important;
-    width: 80% !important;
+    max-width: 95% !important;
+    min-width: unset !important;
+    width: 90% !important;
     padding: 20px 0px !important;
     scale: 1 !important;
 
@@ -455,7 +458,7 @@
     }
 
     h2 {
-      font-size: 14.5vw !important;
+      font-size: 12vw !important;
     }
   }
 
@@ -465,7 +468,7 @@
     padding-top: 100px !important;
 
     .profil-header-left-container {
-      width: 80% !important;
+      width: 90% !important;
       max-width: unset !important;
     }
 
@@ -495,12 +498,18 @@
     }
 
     .image-container {
+      width: 90vw !important;
       padding: 0 !important;
+    }
+
+    .information-container h3 {
+      font-size: 11vw !important; 
     }
   }
 
   .second-information-container {
     flex-direction: column;
+
 
     li:nth-child(even) {
       align-items: flex-end;
@@ -583,10 +592,16 @@
 
   .project-list-container {
     grid: auto / 1fr !important;
+
+    .project-component-container { width: 100%; }
   }
 
 
   // Project Component
+  .project-component-container {
+    width: calc(100vw - 10vw - 25px)
+  }
+
   .project-component-container .image-container {
     height: 300px !important;
   }
@@ -933,8 +948,8 @@
 
     .projects-slider {
       padding-left: 15px;
-      padding-top: 80px;
-      width: 350% !important;
+      padding-top: 0px;
+      width: 250% !important;
       gap: 130px !important;
       transition: transform .3s;
 

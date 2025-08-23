@@ -72,6 +72,7 @@ function Diplomes ({ diplomes, dashboard = false }: Props){
 
 function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: LineProps) {
   const contentRef = REACT.useRef<HTMLLIElement>(null);
+  const titleRef= REACT.useRef<HTMLParagraphElement>(null)
 
   async function deleteDiplome(){
     if ( dashboard ) {
@@ -79,9 +80,9 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
     }
   }
 
-  return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
+  return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: titleRef.current ? { height: `${titleRef.current.scrollHeight + 50}px`} : { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
     <div className="diplome-information">
-      <p>
+      <p ref={titleRef}>
         <strong>{diplome.ecole}</strong> - {diplome.diplome} 
         { 
           dashboard && <span> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button onClick={() => deleteDiplome()}>Supprimer</button> </span> 

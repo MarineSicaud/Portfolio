@@ -12,6 +12,10 @@ function HomeProject({ projects }: { projects:  F_ProjectComponentType[] }) {
 
   if ( !Array.isArray(projects) ) return <p>Erreur</p>
 
+  REACT.useEffect(() => {
+    console.log(projects.length, sliderIndex)
+  }, [sliderIndex])
+
   return <section className="projects-slider-container">
 
     <SectionTitle text="Projets Récents" color={Colors.Rose} />
@@ -22,7 +26,7 @@ function HomeProject({ projects }: { projects:  F_ProjectComponentType[] }) {
         null
     }
     {
-      sliderIndex < 2 && projects.length !== 1 ?
+      sliderIndex < projects.length - 1 && projects.length !== 1 ?
         <span className="right-arrow" onClick={() => {
           setSliderIndex(sliderIndex+1)
           console.log("click")
