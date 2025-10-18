@@ -1,4 +1,4 @@
-export const dynamic = 'force‑dynamic';
+export const dynamic = 'force-dynamic';
 
 import "../../style/list_projects.scss"
 import { Footer } from "@/component/global/footer"

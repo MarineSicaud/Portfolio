@@ -1,6 +1,6 @@
 "use client"
 
-export const dynamic = 'force‑dynamic';
+export const dynamic = 'force-dynamic';
 
 import { DashboardInput } from "@/component/dashboard_input"
 import React from "react"

@@ -1,4 +1,4 @@
-export const dynamic = 'force‑dynamic';
+export const dynamic = 'force-dynamic';
 
 import { Colors, Sphere } from "@/component/global/sphere";
 import "../style/homepage.scss"
