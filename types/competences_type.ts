@@ -6,7 +6,7 @@ export type B_CompetenceType = {
   _id: string,
   name: string,
   type: "Marketing" | "Design", 
-  image: File | string
+  image_url: File | string
 }
 
 export type B_NewCompetenceType = {

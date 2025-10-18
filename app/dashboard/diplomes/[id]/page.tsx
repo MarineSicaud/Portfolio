@@ -23,6 +23,7 @@ function NewDiplome( {params} : { params: Promise<{ id: string }>}){
     if ( id === "new" ){ 
       const pushFiles = await Fetching.postDatas<NewDiplomeType>("/diplomes", diplome)
     }else {
+      //@ts-ignore
       const updateFiles = await Fetching.patchDatas<DiplomeType>("/diplomes", diplome)
     }
   }

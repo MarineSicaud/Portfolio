@@ -1,5 +1,5 @@
 import { StatusCode } from "@/types/http_response_type";
-import { ProjectComponent } from "@/types/project_type";
+import { F_ProjectComponentType } from "@/types/project_type";
 import { HttpResponse } from "@/utils/http_response";
 import { connectionToDatabase } from "@/utils/mongodb"
 import { Projet } from "@/utils/projets";
@@ -11,7 +11,7 @@ async function GET(req: Request) {
   try {
     await connectionToDatabase()
 
-    let projets: ProjectComponent[];
+    let projets: F_ProjectComponentType[];
 
     if ( length ){
       projets = await Projet.get_last_projets_component(length)

@@ -76,8 +76,8 @@ async function PATCH(req: Request) {
 
   let images = []
 
-  if ( typeof competence.image !== "string") {
-    images.push(competence.image)
+  if ( typeof competence.image_url !== "string") {
+    images.push(competence.image_url)
   }
 
   let filter_image_to_push = await image_gestion.append_file(images)

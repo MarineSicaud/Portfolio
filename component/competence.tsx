@@ -3,6 +3,8 @@ import Image from "next/image"
 type Props = {
   image_url: string,
   name: string,
+  id: string,
+  dashboard: boolean
 }
 
 function Competence({ image_url, name }: Props){

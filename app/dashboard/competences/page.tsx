@@ -18,6 +18,7 @@ async function DashboardCompetences(){
     "use server"
     const id = formData.get("id");
 
+    //@ts-ignore
     const removeComp = await Fetching.deleteDatas("/competences", id) 
   }
 

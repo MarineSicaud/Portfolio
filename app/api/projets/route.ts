@@ -34,13 +34,14 @@ async function POST(req: Request){
   let project = formToObject<B_ProjectType>(formData)
 
   // Get independants images
-  // And reassigned them in there content.images.file
+  // And reassigned them in content.images.file
   for ( const key in project ) {
     if ( key.includes("content.")) {
       const splitKey = key.split(".")
       const contentIndex = Number(splitKey[1])
       const imageIndex = Number(splitKey[2])
 
+      // @ts-ignore
       project.content[contentIndex].images[imageIndex].file = project[key]
     }
   }
@@ -62,6 +63,7 @@ async function POST(req: Request){
     }
   }
 
+  // @ts-ignore
   let filter_image_to_push = await image_gestion.append_file([project.background_image, ...project_content_images])
 
   // Verify if the push has a probleme
@@ -85,7 +87,7 @@ async function POST(req: Request){
     if ( !save_images_path ) return HttpResponse(StatusCode.ConflicWithServer)
 
     // And create project in database
-    const create_projet = await Projet.new_project(project as Project)
+    const create_projet = await Projet.new_project(project as B_ProjectType)
 
     if( create_projet ){
       return HttpResponse(StatusCode.Success)

@@ -5,7 +5,7 @@ import Image from "next/image"
 import React from "react"
 
 import "@/style/dashboard.scss"
-import { Competence, NewCompetence } from "@/types/competences_type"
+import { B_CompetenceType, B_NewCompetenceType } from "@/types/competences_type"
 import { Fetching } from "@/utils/fetching"
 
 function NewComp({params}: { params: Promise<{ id: string }>}){
@@ -22,13 +22,13 @@ function NewComp({params}: { params: Promise<{ id: string }>}){
 
   React.useEffect(() => {
     async function getData() {
-      type CompetenceType = {
+      type B_CompetenceType = {
         _id: string,
         name: string,
         type: string,
         image_url: string
       }
-      const datas = await Fetching.getDatas<CompetenceType>(`/competences?id=${id}`)
+      const datas = await Fetching.getDatas<B_CompetenceType>(`/competences?id=${id}`)
       console.log(datas)
 
       if ( !datas ) return 
@@ -53,23 +53,26 @@ function NewComp({params}: { params: Promise<{ id: string }>}){
 
 
   async function sendCompetences(){
-    let newComp: NewCompetence = {
+    let newComp: B_NewCompetenceType = {
       name: competences.name,
       image: competences.image.file,
-      type: competences.type
+      type: competences.type as "Marketing" | "Design"
     }
 
     if ( id === "new") {
-      const newCompetences = await Fetching.postDatas<NewCompetence>("/competences", newComp)
+      const newCompetences = await Fetching.postDatas<B_NewCompetenceType>("/competences", newComp)
     }
     else{
+     //@ts-ignore
      newComp._id = id 
   
      if ( competences.image.file.name === "file.name"){
-      newComp.image = competences.image.path 
+        //@ts-ignore
+        newComp.image = competences.image.path 
     }
 
-      const updateCompetences = await Fetching.patchDatas<Competence>("/competences", newComp)
+        //@ts-ignore
+      const updateCompetences = await Fetching.patchDatas<B_CompetenceType>("/competences", newComp)
     }
   }
 

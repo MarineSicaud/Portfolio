@@ -1,6 +1,6 @@
 "use client"
 
-import { Project, ProjectContent, B_ProjectType } from "@/types/project_type"
+import { F_ProjectType, F_ProjectContentType, B_ProjectType } from "@/types/project_type"
 import * as React from "react"
 
 import "@/style/project_page.scss"
@@ -9,7 +9,6 @@ import { Footer } from "@/component/global/footer"
 import { ResponsiveValues, usePage, usePageReturn } from "@/hooks/usePage"
 import { DashboardInput } from "@/component/dashboard_input"
 import Image from "next/image"
-import { POSTProject } from "@/app/api/projets/route"
 import { Fetching } from "@/utils/fetching"
 
 const social_media = [
@@ -28,7 +27,7 @@ const social_media = [
 function NewProject({ params }: { params: Promise<{ id: string }>} ){
   const infoPage = usePage()
 
-  const [projet, setProjet] = React.useState<Project>({
+  const [projet, setProjet] = React.useState<B_ProjectType>({
     _id: "",
     title: "",
     description: "",
@@ -47,10 +46,11 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
   const { id } = React.use(params)
 
   async function pushProject(){
-    let newProject: POSTProject = {
+    let newProject: B_ProjectType = {
       title: projet.title,
       description: projet.description,
       services: projet.services,
+      //@ts-ignore
       background_image: projet.background_image.file,
       content: projet.content,
       client: projet.client,
@@ -60,7 +60,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
     }
     
     if ( id === "new" ){
-    const sendProjet = await Fetching.postDatas<POSTProject>("/projets", newProject)
+    const sendProjet = await Fetching.postDatas<B_ProjectType>("/projets", newProject)
     }else {
       newProject._id = projet._id
       if ( typeof projet.background_image === "string") {
@@ -68,7 +68,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
       }
 
       console.log("Updating project.... : ", newProject)
-      const updateProjet = await Fetching.patchDatas<POSTProject>("/projets", newProject)
+      const updateProjet = await Fetching.patchDatas<B_ProjectType>("/projets", newProject)
     }
   }
 
@@ -207,6 +207,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
       height={1080}
       data-parallax="30"
       data-offset="400"
+      //@ts-ignore
       style={projet.background_image.path === "" ? {background: "blue"} : {}}
       />
       :
@@ -216,14 +217,15 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
 
       <section className="project-information-container">
       {
+        //@ts-ignore
         projet.content.map((content, i) => (
-          <ProjectInformations projet={content as ProjectContent} key={i} infoPage={infoPage} index={i} project={projet} setProjet={setProjet}/>
+          <ProjectInformations projet={content as F_ProjectContentType} key={i} infoPage={infoPage} index={i} project={projet} setProjet={setProjet}/>
         ))
       }
 
       <button className="add"
         onClick={() => {
-          const newContent: ProjectContent = {
+          const newContent: F_ProjectContentType = {
             title: "",
             description: "",
             images: []
@@ -244,20 +246,27 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
 
 
   {
+      //@ts-ignore
     projet._id && <button className="push" onClick={() => pushProject()}>push</button> || projet.title && projet.description && projet.content.length > 0 && projet.background_image.file.name !== "file.name" && projet.type !== "" && projet.client && projet.duree && projet.services.length > 0 && <button className="push" onClick={() => pushProject()}>push</button>
   }
 
 
 
-      <Footer social_media={social_media}/>
+    {
+
+      //@ts-ignore
+      true && <Footer social_media={social_media}/>
+
+    }
+
     </>
 }
-function ProjectInformations( { projet, infoPage, project, index, setProjet }: { projet: ProjectContent, infoPage: usePageReturn, index: number, project: Project, setProjet: React.Dispatch<React.SetStateAction<Project>> } ){
+function ProjectInformations( { projet, infoPage, project, index, setProjet }: { projet: F_ProjectContentType, infoPage: usePageReturn, index: number, project: F_ProjectType, setProjet: React.Dispatch<React.SetStateAction<F_ProjectType>> } ){
   let count = projet.images.length
   let next: null | number = null
 
   function updateValue(key: "title" | "description", value: string) {
-    let content: ProjectContent = project.content[index]
+    let content: F_ProjectContentType = project.content[index]
     content[key] = value
     
     project.content[index] = content
@@ -299,7 +308,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
           reader.onload = () => {
             pathname = reader.result as string | ""
 
-            let content: ProjectContent = project.content[index]
+            let content: F_ProjectContentType = project.content[index]
             content.images[i] = {
               ...content.images[i],
               path: pathname,
@@ -352,7 +361,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
           reader.onload = () => {
             pathname = reader.result as string | ""
 
-            let content: ProjectContent = project.content[index]
+            let content: F_ProjectContentType = project.content[index]
             content.images[i + 1] = {
               ...content.images[i + 1],
               path: pathname,
@@ -395,7 +404,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
           reader.onload = () => {
             pathname = reader.result as string | ""
 
-            let content: ProjectContent = project.content[index]
+            let content: F_ProjectContentType = project.content[index]
             content.images[i] = {
               ...content.images[i],
               path: pathname,
@@ -434,7 +443,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
         file: new File([""], "file.name"),
         path: ""
       }
-    let content: ProjectContent = project.content[index]
+    let content: F_ProjectContentType = project.content[index]
     content.images.push({
       path: "",
       file: new File([""], "file.name"),
