@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Competence } from "@/component/competence"
 import { Fetching } from "@/utils/fetching"
 
