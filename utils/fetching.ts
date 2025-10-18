@@ -7,7 +7,7 @@ export type DataFetch<T> = {
   message: string
 }
 
-const WEBSITE_LINK = "http://192.168.0.30:3000"
+const WEBSITE_LINK = "http://82.67.104.153:3000"
 
 class Fetching<T> {
   static async getDatas<T>(url: string): Promise<T | false> {
