@@ -2,9 +2,9 @@ import { FileType } from "@/types/files_type"
 import "dotenv/config"
 
 class Github {
-  private repoOwner = "WhoamiUnderscore"
+  private repoOwner = "MarineSicaud"
   private repoName = "Marine-Portfolio"
-  private branch = "dev" // TODO: Mettre main quand projet fait
+  private branch = "main"
   private githubToken = process.env.GITHUB_CONNECTION
 
   private headers = {
