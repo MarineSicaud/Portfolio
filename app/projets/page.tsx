@@ -1,4 +1,5 @@
 export const dynamic = 'force‑dynamic';
+
 import "../../style/list_projects.scss"
 import { Footer } from "@/component/global/footer"
 import { AllProjects } from "@/component/all_projects"

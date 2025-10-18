@@ -1,4 +1,5 @@
 export const dynamic = 'force‑dynamic';
+ 
 import { Diplomes } from "@/component/diplomes";
 import { DiplomeType } from "@/types/diplomes_types";
 import { Fetching } from "@/utils/fetching";

@@ -1,5 +1,6 @@
-export const dynamic = 'force‑dynamic';
 "use client"
+
+export const dynamic = 'force‑dynamic';
 
 import { F_ProjectType, F_ProjectContentType, B_ProjectType } from "@/types/project_type"
 import * as React from "react"

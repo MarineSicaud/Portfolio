@@ -1,4 +1,5 @@
 export const dynamic = 'force‑dynamic';
+
 import { ProjectComponent } from "@/component/project_component"
 import "@/style/dashboard.scss"
 import { F_ProjectComponentType } from "@/types/project_type"

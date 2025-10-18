@@ -1,4 +1,5 @@
 export const dynamic = 'force‑dynamic';
+
 import { Reviews } from "@/component/reviews"
 import { ReviewType } from "@/types/review_type"
 import { Fetching } from "@/utils/fetching"

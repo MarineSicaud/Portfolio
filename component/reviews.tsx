@@ -1,5 +1,6 @@
-export const dynamic = 'force‑dynamic';
 "use client"
+
+export const dynamic = 'force‑dynamic';
 
 import { ReviewType } from "@/types/review_type"
 import { Fetching } from "@/utils/fetching"
