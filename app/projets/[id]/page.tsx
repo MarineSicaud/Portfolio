@@ -1,4 +1,7 @@
+export const dynamic = 'force‑dynamic';
 "use client"
+
+export const dynamic = 'force-dynamic';
 
 import * as REACT from "react"
 import Image from "next/image"

@@ -1,3 +1,4 @@
+export const dynamic = 'force‑dynamic';
 "use client"
 
 import { F_ProjectType, F_ProjectContentType, B_ProjectType } from "@/types/project_type"

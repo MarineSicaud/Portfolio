@@ -1,3 +1,4 @@
+export const dynamic = 'force‑dynamic';
 "use client"
 
 import { DashboardInput } from "@/component/dashboard_input"
