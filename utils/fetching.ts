@@ -7,7 +7,7 @@ export type DataFetch<T> = {
   message: string
 }
 
-const WEBSITE_LINK = "https://www.marinesicaud.fr/"
+const WEBSITE_LINK = "https://www.marinesicaud.fr"
 
 class Fetching<T> {
   static async getDatas<T>(url: string): Promise<T | false> {

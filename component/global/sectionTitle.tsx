@@ -15,7 +15,7 @@ function SectionTitle({ text, color }: Props){
           return <span key={i} style={{backgroundColor: color}}>{t}</span>
         }
 
-        return <span style={{backgroundColor: "unset", fontFamily:"unset", color: "unset"}} key={i}>{t}</span>
+        return <span style={{backgroundColor: "unset", padding: "0", fontFamily:"unset", color: "unset"}} key={i}>{t}</span>
       })
     }
   </h3>

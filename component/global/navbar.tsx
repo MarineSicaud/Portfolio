@@ -27,6 +27,10 @@ function FinalNavbar(){
 function Mobile(){
   const [isOpen, setIsOpen] = React.useState(false)
 
+  function clearState() {
+    setIsOpen(false);
+  }
+
   return <header className={"mobile-header"}>
     <nav>
       <Link href={"/"}>
@@ -50,9 +54,9 @@ function Mobile(){
         <span className="close" onClick={() => setIsOpen(false)}/>
 
         <ul className="onglet-container">
-          <li className="onglet"><Link href={"/"}>Acceuil <span className="arrow"/></Link></li>
-          <li className="onglet"><Link href={"/profil"}>Profil <span className="arrow" /></Link></li>
-          <li className="onglet"><Link href={"/projets"}>Projets <span className="arrow" /></Link></li>
+          <li className="onglet"><Link href={"/"} onNavigate={clearState}>Acceuil <span className="arrow"/></Link></li>
+          <li className="onglet"><Link href={"/profil"} onNavigate={clearState}>Profil <span className="arrow" /></Link></li>
+          <li className="onglet"><Link href={"/projets"} onNavigate={clearState}>Projets <span className="arrow" /></Link></li>
           <li className="contact"><Link href={"mailto:marine.sicaud.pro@gmail.com"}>
             Parlons-en
             <FontAwesomeIcon icon={faArrowRight} />
