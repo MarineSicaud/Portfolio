@@ -123,12 +123,13 @@ function NewComp({params}: { params: Promise<{ id: string }>}){
       <option value={"Marketing"}>Marketing</option>
       <option value={"Design"}>Design</option>
     </select>
-  </article>
 
 
-  {
-    competences.name && competences.image.file && competences.type && <button onClick={() => sendCompetences()}>Push</button>
-  }
+    {
+        competences.name && competences.image.file && competences.type && <button className="save-button" style={{ margin: "auto" }} onClick={() => sendCompetences()}>Enregistrer</button>
+    }
+    </article>
+
   </> 
 }
 

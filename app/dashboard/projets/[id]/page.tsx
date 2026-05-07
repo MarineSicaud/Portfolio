@@ -243,14 +243,16 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
           }))
         }}
       >add</button>
-      </section>
-  </section>
-
 
   {
       //@ts-ignore
-    projet._id && <button className="push" onClick={() => pushProject()}>push</button> || projet.title && projet.description && projet.content.length > 0 && projet.background_image.file.name !== "file.name" && projet.type !== "" && projet.client && projet.duree && projet.services.length > 0 && <button className="push" onClick={() => pushProject()}>push</button>
+    projet._id && <button className="save-button" style={{ width: "200px", margin: "0 auto" }} onClick={() => pushProject()}>push</button> || projet.title && projet.description && projet.content.length > 0 && projet.background_image.file.name !== "file.name" && projet.type !== "" && projet.client && projet.duree && projet.services.length > 0 && <button className="save-button" onClick={() => pushProject()}>push</button>
   }
+      </section>
+
+  </section>
+
+
 
 
 
@@ -466,6 +468,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
     }))
     }}>add</button>
   </section>
+
   </section>
 }
 

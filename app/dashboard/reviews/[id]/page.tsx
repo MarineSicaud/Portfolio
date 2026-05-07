@@ -49,7 +49,7 @@ function NewReview({ params }: { params: Promise<{ id: string }>}){
   </article> 
 
   {
-    review.name && review.review && <button onClick={() => sendData()}>Push</button>
+    review.name && review.review && <button className="save-button" onClick={() => sendData()}>Enregistrer</button>
   }
   </section>
 }

@@ -59,7 +59,7 @@ function Review({ review, is_active, dashobard }: { review: ReviewType, is_activ
 
   return <article className="review-container" style={{ scale: is_active ? "1.2" : ".6"}}>
   {
-    dashobard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button onClick={() => deleteReview()}>Supprimer</button></>
+    dashobard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
   }
     <div className="review-user-information">
       <h4>{review.name}</h4>

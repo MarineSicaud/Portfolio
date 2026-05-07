@@ -87,7 +87,7 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
       <p ref={titleRef}>
         <strong>{diplome.ecole}</strong> - {diplome.diplome} 
         { 
-          dashboard && <span> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button onClick={() => deleteDiplome()}>Supprimer</button> </span> 
+          dashboard && <span style={{ fontSize: "1rem" }}> | <Link href={`/dashboard/diplomes/${diplome._id}`}>Modifier</Link>  <button className="delete-button" onClick={() => deleteDiplome()}>Supprimer</button> </span> 
         } 
       </p>
 
