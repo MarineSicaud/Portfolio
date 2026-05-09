@@ -18,9 +18,10 @@
   .filter-select {
     font-size: .9rem;
     outline: 0;
-    border: 1px solid vars.$black;
-    padding: 10px;
-    border-radius: 10px;
+    border: 2px solid vars.$black;
+    background: transparent;
+    padding: 10px 20px 10px 10px;
+    border-radius: 20px;
 
     &::picker(select){
       background: blue !important;

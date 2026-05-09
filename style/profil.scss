@@ -55,8 +55,11 @@
         transition: opacity .3s;
 
         svg {
+          opacity: 0;
           width: 0;
-          transition: width .3s;
+          transition: .3s;
+          pointer-events: none;
+          transition-property: width, opacity;
         }
 
         &:hover {
@@ -64,6 +67,7 @@
 
           svg {
             width: 20px;
+            opacity: 1;
           }
         }
       }

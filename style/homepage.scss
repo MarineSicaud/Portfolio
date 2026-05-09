@@ -40,10 +40,12 @@
       transition-properties: color, background;
 
       img {
+        opacity: 0;
         width: 0;
         height: 0;
         transition: .3s;
-        transition-properties: width, height;
+        transition-properties: opacity, width, height;
+        pointer-events: none;
       }
 
 
@@ -55,6 +57,7 @@
         img {
           width: 33px;
           height: auto;
+          opacity: 1;
         }
       }
     }
