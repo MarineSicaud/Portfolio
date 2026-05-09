@@ -21,16 +21,16 @@ const skills = [
     text: "Persévérance",
     color: getRandom(0, colors.length),
     position: {
-      x: 18,
-      y: 72,
-      deg: 45
+      x: 4,
+      y: 87,
+      deg: 60
     }
   },
   {
     text: "Autonomie",
     color: getRandom(0, colors.length),
     position: {
-      x: 53,
+      x: 46,
       y: 81.7,
       deg: 0
     }
@@ -41,7 +41,7 @@ const skills = [
     position: {
       x: 78,
       y: 68,
-      deg: -15
+      deg: -25
     }
   },
   {
@@ -49,17 +49,17 @@ const skills = [
     color: getRandom(0, colors.length),
     position: {
       x: 40,
-      y: 68,
-      deg: 13
+      y: 72,
+      deg: 10
     }
   },
   {
     text: "Créativité",
     color: getRandom(0, colors.length),
     position: {
-      x: 60,
-      y: 59.5,
-      deg: 0
+      x: 65,
+      y: 65.5,
+      deg: 12
     }
   },
   {
@@ -67,8 +67,8 @@ const skills = [
     color: getRandom(0, colors.length),
     position: {
       x: 20,
-      y: 53.5,
-      deg: 12
+      y: 57.5,
+      deg: 20
     }
   },
   {
@@ -76,16 +76,16 @@ const skills = [
     color: getRandom(0, colors.length),
     position: {
       x: 75,
-      y: 50,
-      deg: 10
+      y: 58.5,
+      deg: 12
     }
   },
   {
     text: "Leadership",
     color: getRandom(0, colors.length),
     position: {
-      x: 35.5,
-      y: 45,
+      x: 39,
+      y: 46.5,
       deg: 5
     }
   },
@@ -103,7 +103,7 @@ const skills = [
     color: getRandom(0, colors.length),
     position: {
       x: 79,
-      y: 40.5,
+      y: 46.8,
       deg: 10
     }
   },
@@ -111,9 +111,9 @@ const skills = [
     text: "Esprit d'équipe",
     color: getRandom(0, colors.length),
     position: {
-      x: 50,
-      y: 26,
-      deg: 6
+      x: 53,
+      y: 33,
+      deg: 15
     }
   },
 ]
@@ -128,14 +128,17 @@ function Skills() {
 
       gsap.fromTo(el.style, 
         {
-          transform: `translate(-50%, -${getRandom(200, 600)}%) rotate(${skills[i].position.deg}deg)`,
+          transform: `translate(-50%, -${getRandom(200, 600)}%)`,
+          rotate: `${skills[i].position.deg}deg`
         },
         {
-          transform: `translate(-50%, -50%) rotate(${skills[i].position.deg}deg)`,
+          transform: `translate(-50%, -50%) scale(1)`,
+          rotate: `${skills[i].position.deg}deg`,
           duration: 1,
-          ease: "bounce.out"
+          ease: "bounce.out",
         }
       )
+
     }
   }, [skillsRef])
 
@@ -149,12 +152,26 @@ function Skills() {
       ref={(el) => {
         if (el) skillsRef.current[i] = el
       }} 
+    id={i}
     key={i} 
+    onMouseEnter={() => {
+        skillsRef.current.forEach((el, index) => {
+            if ( index !== i ) {
+                el.classList.add("no-hover")
+            }
+        })
+    }}
+    onMouseLeave={() => {
+        skillsRef.current.forEach((el, index) => {
+            el.classList.remove("no-hover")
+        })
+    }}
     style={{ 
-      background: colors[v.color], 
-      top: `${v.position.y}%`, 
-      left: `${v.position.x}%`, 
-      transform: `translate(-50%, -50%) rotate(${v.position.deg}deg)`
+        "--background-color": colors[v.color],
+        background: colors[v.color], 
+        top: `${v.position.y}%`, 
+        left: `${v.position.x}%`, 
+        rotate: `${v.position.deg}deg`
     }}>
     {v.text}
     </li>
