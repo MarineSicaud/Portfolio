@@ -128,14 +128,14 @@ function Skills() {
 
       gsap.fromTo(el.style, 
         {
-          transform: `translate(-50%, -${getRandom(200, 600)}%)`,
-          rotate: `${skills[i].position.deg}deg`
+          opacity: 0,
+          transform: `translate(-50%, -${getRandom(200, 600)}%) scale(1)`,
         },
         {
           transform: `translate(-50%, -50%) scale(1)`,
-          rotate: `${skills[i].position.deg}deg`,
-          duration: 1,
-          ease: "bounce.out",
+          opacity: 1,
+          duration: .5,
+          ease: "back.inOut",
         }
       )
 

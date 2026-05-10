@@ -82,7 +82,6 @@ input {
   font-family: vars.$base-font;
   margin-left: -10px;
   width: fit-content !important;
-  text-align: center;
 }
 
 .projet-page-header {
@@ -93,6 +92,11 @@ input {
   position: absolute;
   top: 30px;
   right: 100px;
+  border: 2px solid vars.$black;
+  border-radius: 20px;
+  padding: 5px;
+  font-size: .8rem;
+  font-family: vars.$base-font;
 }
 
 .image-container input, .image input {
@@ -113,6 +117,13 @@ input {
     flex-wrap: wrap;
     align-items: center;
     gap: 100px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
   }
 }
 
@@ -130,8 +141,14 @@ input {
   align-items: center;
   justify-content: center;
   gap: 30px;
-}
 
+  select {
+    border: 2px solid vars.$black;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+  }
+}
 
 .diplome-dashboard {
   width: 100vw;
@@ -243,27 +260,43 @@ input {
   padding: 0 5vw;
 }
 
-    .review-container {
-      width: 700px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 30px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      transition: scale .3s;
+.review-container {
+  width: 700px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: scale .3s;
 
-      .review-user-information {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      align-items: center;
-      }
+  .review-user-information {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
 
-      .review {
-        width: 70%;
-      }
-    }
+  .review {
+    width: 70%;
+  }
+}
+
+.append-button, .delete-competences {
+  background: transparent;
+  border: 2px solid vars.$black;
+  border-radius: 20px;
+  width: fit-content;
+  padding: 5px 10px;
+  transition: .3s;
+  transition-property: background, color;
+
+  &:hover {
+    background: vars.$black;
+    color: vars.$background;
+  }
+
+}

@@ -13,6 +13,8 @@ class ImagesGestion {
 
   async append_file(files: File[]): Promise<this> {
     for ( let i = 0; i < files.length; i++ ) {
+      if ( !files[i] ) continue;
+
       let url = `/images/${files[i].name}`
 
       let image_already_exist = await this.already_exist(url)

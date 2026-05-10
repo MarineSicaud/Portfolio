@@ -117,7 +117,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
           <li>Client</li>
 
           <li>
-            <DashboardInput value={projet.client} setValue={setProjet} setValueKey="client" fontSize={1} style={{ width: "100px"}} />
+            <DashboardInput value={projet.client} setValue={setProjet} setValueKey="client" fontSize={1} style={{ width: "100px", paddingLeft: "10px"}} />
           </li>
         </ul>
 
@@ -126,7 +126,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
 
           {
             projet.services.map((s, i) => <li>
-              <input value={s} onChange={(e) => {
+              <input style={{ paddingLeft: "10px", fontSize: "1rem" }} value={s} onChange={(e) => {
                 let value = e.target.value
 
                 let newServices = projet.services
@@ -138,7 +138,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
                 }))
               }} />
 
-              <span onClick={() => {
+              <span style={{ cursor: "pointer" }} onClick={() => {
                 let servicesProjets = projet.services
                 servicesProjets.pop()
 
@@ -151,7 +151,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
             </li>)
           }
 
-          <button onClick={() => {
+          <button className="append-button" onClick={() => {
             let projetServices = projet.services
             projetServices.push("Nouveau service")
 
@@ -159,7 +159,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
               ...prev,
               services: projetServices
             }))
-          }}>add</button>
+          }}>Ajouter</button>
 
         </ul>
 
@@ -167,7 +167,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
           <li>Duree</li>
 
           <li>
-            <DashboardInput value={projet.duree} setValue={setProjet} setValueKey="duree" fontSize={1} style={{ width: "100px"}} />
+            <DashboardInput value={projet.duree} setValue={setProjet} setValueKey="duree" fontSize={1} style={{ width: "100px", paddingLeft: "10px"}} />
           </li>
         </ul>
 
@@ -225,7 +225,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
         ))
       }
 
-      <button className="add"
+      <button className="append-button"
         onClick={() => {
           const newContent: F_ProjectContentType = {
             title: "",
@@ -242,11 +242,11 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
             content: projetContent
           }))
         }}
-      >add</button>
+      >Ajouter une section</button>
 
   {
       //@ts-ignore
-    projet._id && <button className="save-button" style={{ width: "200px", margin: "0 auto" }} onClick={() => pushProject()}>push</button> || projet.title && projet.description && projet.content.length > 0 && projet.background_image.file.name !== "file.name" && projet.type !== "" && projet.client && projet.duree && projet.services.length > 0 && <button className="save-button" onClick={() => pushProject()}>push</button>
+    projet._id && <button className="save-button" style={{ width: "200px", margin: "0 auto" }} onClick={() => pushProject()}>Sauvegarder</button> || projet.title && projet.description && projet.content.length > 0 && projet.background_image.file.name !== "file.name" && projet.type !== "" && projet.client && projet.duree && projet.services.length > 0 && <button className="save-button" onClick={() => pushProject()}>Sauvegarder</button>
   }
       </section>
 
@@ -288,7 +288,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
   <section className="information-container">
   <input onChange={(e) => updateValue("title", e.target.value)} style={{fontSize: `2rem`}} value={projet.title} placeholder={`Veuillez renseignez le titre de section`} />
 
-  <textarea onChange={(e) => updateValue("description", e.target.value)} style={{ resize: "none", height: "auto", width: "30%", fontSize: `1rem`}} value={projet.description} placeholder={`Veuillez renseignez le description de la section`} />
+  <textarea onChange={(e) => updateValue("description", e.target.value)} style={{ resize: "none", height: "auto", width: "50%", fontSize: `1rem`}} value={projet.description} placeholder={`Veuillez renseignez le description de la section`} />
   </section>
 
   <section className="images-container">
@@ -441,7 +441,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
     })
 
   }
-    <button onClick={() => {
+    <button className="append-button" onClick={() => {
       const newImage = {
         alt: "Image",
         file: new File([""], "file.name"),
@@ -466,7 +466,7 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
       ...prev,
       content: newProject
     }))
-    }}>add</button>
+    }}>Ajouter une image</button>
   </section>
 
   </section>

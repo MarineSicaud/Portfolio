@@ -38,14 +38,17 @@ function NewReview({ params }: { params: Promise<{ id: string }>}){
   }, [id])
 
   return <section className="new-reviews-page">
-    <article className="review-container" style={{ scale: "1.2"}}>
+    <article className="new-review-container review-container" style={{ scale: "1.2"}}>
     <div className="review-user-information">
-      <DashboardInput value={review.name} setValueKey="name" setValue={setReview} fontSize={1.4} />
+      <DashboardInput value={review.name} setValueKey="name" setValue={setReview} fontSize={1.4} style={{textAlign: "center"}} />
 
       <DashboardInput value={review.job} setValueKey="job" setValue={setReview} fontSize={.8} />
     </div>
 
-      <DashboardInput value={review.review} setValueKey="review" setValue={setReview} fontSize={1} />
+    <textarea value={review.review} onChange={(e) => setReview((prev) => ({
+      ...prev,
+      review: e.target.value
+    }))} placeholder="Veuillez entrer l'avis"/>
   </article> 
 
   {

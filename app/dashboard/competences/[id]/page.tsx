@@ -111,7 +111,7 @@ function NewComp({params}: { params: Promise<{ id: string }>}){
     : <span style={{width: "50px", height: "50px"}} />
     }
     
-    <DashboardInput value={competences.name} setValue={setCompetences} fontSize={1} setValueKey="name" />
+    <DashboardInput value={competences.name} setValue={setCompetences} fontSize={1} setValueKey="name" style={{ textAlign: "center"}}/>
 
     <select onChange={(e) => {
             setCompetences((prev) => ({

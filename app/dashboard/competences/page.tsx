@@ -36,8 +36,8 @@ async function DashboardCompetences(){
 
       <form action={deleteComp}>
       <input type="hidden" name="id" value={c._id} />
-      <button className="delete-projet" type="submit">
-      Supprimer Projet
+      <button className="delete-competences" type="submit">
+      Supprimer
       </button>
       </form>
       </li>

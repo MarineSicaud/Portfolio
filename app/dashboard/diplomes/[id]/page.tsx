@@ -59,7 +59,7 @@ function NewDiplome( {params} : { params: Promise<{ id: string }>}){
   </li>
 
   {
-    diplome.ecole && diplome.description && diplome.diplome && <button onClick={() => sendFiles()}>push</button>
+    diplome.ecole && diplome.description && diplome.diplome && <button className={"append-button"} onClick={() => sendFiles()}>Sauvegarder</button>
   }
   </section>
 }

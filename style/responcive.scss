@@ -424,6 +424,11 @@
     justify-content: center;
   }
 
+  .new-review-container {
+    display: flex !important;
+  }
+
+
   .review-container {
     max-width: 95% !important;
     min-width: unset !important;
@@ -1037,6 +1042,10 @@
     justify-content: center;
   }
 
+  .new-review-container {
+    display: flex !important;
+  }
+
   .review-container {
     max-width: unset !important;
     width: 80% !important;
@@ -1044,7 +1053,7 @@
     scale: 1 !important;
 
     &:nth-child(1){
-      display: none !important;
+      display: none;
     }
 
     &:nth-child(3){

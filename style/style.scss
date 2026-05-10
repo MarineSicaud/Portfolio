@@ -584,10 +584,15 @@ footer {
   border-color: vars.$black;
   padding: 10px 15px;
   border-radius: 20px;
-  transition: scale .3s ease-in-out;
+  transition: .3s ease-in-out;
+  transition-property: scale, background, color;
   cursor: pointer;
 
-  &:hover { scale: 1.2; }
+  &:hover { 
+    scale: 1.2; 
+    background: vars.$black;
+    color: vars.$background;
+  }
 }
 
 .delete-button {
