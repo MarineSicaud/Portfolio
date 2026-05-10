@@ -72,7 +72,7 @@ export default async function Home() {
         />
 
         <section className="header-left">
-          <h1>Marketing <span className="special-word">Digital</span> <br/> & Communication <span className="special-word" style={{fontSize: "3rem"}}>.</span></h1>
+          <h1>Marketing <span className="special-word">Digital</span> <br/> & <span>Communication <span className="special-word" style={{fontSize: "3rem"}}>.</span></span></h1>
 
           <Link href={"mailto:marine.sicaud.pro@gmail.com"} className="contact-button">
             Contactez-moi 
