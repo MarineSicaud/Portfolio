@@ -3,7 +3,7 @@ import "dotenv/config"
 
 class Github {
   private repoOwner = "MarineSicaud"
-  private repoName = "Marine-Portfolio"
+  private repoName = "Portfolio"
   private branch = "main"
   private githubToken = process.env.GITHUB_CONNECTION
 
@@ -20,6 +20,7 @@ class Github {
     )
 
     let branchRef = await branchRefRequest.json();
+
 
     return branchRef.object.sha;
   }

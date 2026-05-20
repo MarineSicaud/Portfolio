@@ -31,7 +31,7 @@ class Fetching<T> {
     const formData = this.createFormData<T>(data);
 
 
-    const request = await fetch(`${WEBSITE_LINK}/api${url}`, {
+    const request = await fetch(`/api${url}`, {
       method: "POST",
       body: formData
     })
