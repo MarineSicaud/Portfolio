@@ -56,7 +56,7 @@ export default async function Home() {
           container={{
             top: "unset",
             right: "unset",
-            bottom: -400,
+            bottom: -500,
             left: 0,
             width: 800,
             height: 800
