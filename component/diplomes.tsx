@@ -94,7 +94,7 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
       <span className="active-arrow" style={{ background: colors[(index - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
     </div>
 
-    <p className="diplome-description">
+    <p className="diplome-description" style={{ whiteSpace: "pre-line"}}>
       {diplome.description}
     </p>
   </li>
