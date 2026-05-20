@@ -107,15 +107,6 @@ const skills = [
       deg: 10
     }
   },
-  {
-    text: "Esprit d'équipe",
-    color: getRandom(0, colors.length),
-    position: {
-      x: 53,
-      y: 33,
-      deg: 15
-    }
-  },
 ]
 
 function Skills() {
