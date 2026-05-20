@@ -31,7 +31,7 @@ class Fetching<T> {
     const formData = this.createFormData<T>(data);
 
 
-    const request = await fetch(`http://localhost:3000/api${url}`, {
+    const request = await fetch(`${WEBSITE_LINK}/api${url}`, {
       method: "POST",
       body: formData
     })
@@ -48,7 +48,7 @@ class Fetching<T> {
   static async patchDatas<T extends Record<string, any>>(url: string, data: T): Promise<boolean> {
     const formData = this.createFormData<T>(data);
 
-    const request = await fetch(`http://localhost:3000/api${url}`, {
+    const request = await fetch(`${WEBSITE_LINK}/api${url}`, {
       method: "PATCH",
       body: formData
     })
@@ -63,7 +63,7 @@ class Fetching<T> {
   }
 
   static async deleteDatas(url: string, id: string): Promise<boolean> {
-    const request = await fetch(`http://localhost:3000/api${url}?id=${id}`,
+    const request = await fetch(`${WEBSITE_LINK}/api${url}?id=${id}`,
       {
         method: "DELETE"
       }
