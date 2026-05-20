@@ -7,6 +7,7 @@ export type DataFetch<T> = {
   message: string
 }
 
+// const WEBSITE_LINK = "http://localhost:3000"
 const WEBSITE_LINK = "https://www.marinesicaud.fr"
 
 class Fetching<T> {
@@ -31,7 +32,7 @@ class Fetching<T> {
     const formData = this.createFormData<T>(data);
 
 
-    const request = await fetch(`/api${url}`, {
+    const request = await fetch(`${WEBSITE_LINK}/api${url}`, {
       method: "POST",
       body: formData
     })

@@ -124,7 +124,7 @@ async function PATCH(req: Request) {
   let project_content_images: File[] = []
 
   if ( typeof project.background_image !== "string" ) {
-    project_content_images.push(project.background_image.file)
+    project_content_images.push(project.background_image)
   }
 
   if ( project.content.length > 0 ){
@@ -136,7 +136,6 @@ async function PATCH(req: Request) {
   }
 
   let filter_image_to_push = await image_gestion.append_file([...project_content_images])
-
 
   let push_passed = true;
 
