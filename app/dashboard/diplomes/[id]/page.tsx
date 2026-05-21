@@ -5,6 +5,8 @@ export const dynamic = 'force-dynamic';
 import { DashboardInput } from "@/component/dashboard_input"
 import { Colors } from "@/component/global/sphere"
 import { DiplomeType, NewDiplomeType } from "@/types/diplomes_types"
+import { marked } from "marked"
+import TurndownService from "turndown";
 import * as React from "react"
 
 import "@/style/dashboard.scss"
@@ -22,6 +24,8 @@ function NewDiplome( {params} : { params: Promise<{ id: string }>}){
   })
 
   async function sendFiles(){
+      diplome.description = marked(diplome.description);
+
     if ( id === "new" ){ 
       const pushFiles = await Fetching.postDatas<NewDiplomeType>("/diplomes", diplome)
     }else {
@@ -31,11 +35,14 @@ function NewDiplome( {params} : { params: Promise<{ id: string }>}){
   }
 
   React.useEffect(() => {
+    const turndownService = new TurndownService();
+
     async function getDatas() {
       const data = await Fetching.getDatas<DiplomeType>(`/diplomes?id=${id}`)
 
       if ( !data ) return
 
+          data.description = turndownService.turndown(data.description);
       setDiplome(data)
     }
 

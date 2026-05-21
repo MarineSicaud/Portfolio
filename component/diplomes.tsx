@@ -2,6 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
+import DOMPurify from "dompurify"
 import * as REACT from "react"
 import { Colors } from "./global/sphere"
 import { DiplomeType } from "@/types/diplomes_types"
@@ -82,6 +83,10 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
     }
   }
 
+  REACT.useEffect(() => {
+    diplome.description = DOMPurify.sanitize(diplome.description);
+  }, [])
+
   return <li key={diplome._id} className="diplome-container" style={contentRef.current && active_state ? {height: `${contentRef.current.scrollHeight}px`}: titleRef.current ? { height: `${titleRef.current.scrollHeight + 50}px`} : { height: "100px"}} onClick={() => activeLine(index)} ref={contentRef}>
     <div className="diplome-information">
       <p ref={titleRef}>
@@ -94,8 +99,7 @@ function DiplomeLine({ diplome, active_state, activeLine, index, dashboard }: Li
       <span className="active-arrow" style={{ background: colors[(index - 1) % 3], transform: active_state ? "rotate(180deg)" : "none"}}/>
     </div>
 
-    <p className="diplome-description" style={{ whiteSpace: "pre-line"}}>
-      {diplome.description}
+    <p className="diplome-description" style={{ whiteSpace: "pre-line"}} dangerouslySetInnerHTML={{ __html: diplome.description}}>
     </p>
   </li>
 }
