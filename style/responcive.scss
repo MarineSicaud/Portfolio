@@ -405,52 +405,16 @@
 
 
   // Reviews
-  // .homepage-reviews-container {
-  //   padding-top: 100px !important;
-  //   padding-bottom: 100px !important;
-  // }
-  //
-  // .reviews-container {
-  //   .right-arrow {
-  //     top: -50%;
-  //     right: 0 !important;
-  //   }
-  //
-  //   .left-arrow {
-  //     top: -50%;
-  //     right: 15%;
-  //     left: unset !important;
-  //   }
-  // }
-  //
-  // .reviews-scroll-container {
-  //   justify-content: center;
-  // }
-  //
-  // .new-review-container {
-  //   display: flex !important;
-  // }
-  //
-  //
-  // .review-container {
-  //   max-width: 95% !important;
-  //   min-width: unset !important;
-  //   width: 90% !important;
-  //   padding: 20px 0px !important;
-  //   scale: 1 !important;
-  //
-  //   &:nth-child(1){
-  //     display: none !important;
-  //   }
-  //
-  //   &:nth-child(3){
-  //     display: none !important;
-  //   }
-  //
-  //   .review {
-  //     font-size: .9rem;
-  //   }
-  // }
+  .homepage-reviews-container {
+    margin-top: 50px;
+  }
+
+  .reviews-container {
+    ul {
+      justify-content: start;
+      gap: 200px;
+    }
+  }
 
   // Footer 
   footer {
