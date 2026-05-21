@@ -88,16 +88,19 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
     }
   }, [id])
 
-
   return <>
       <section className="projet-page-header">
         <div className="projet-important-informations">
           <DashboardInput value={projet.title} setValue={setProjet} setValueKey="title" fontSize={3} style={{marginLeft: "-10px", maxWidth: "70%"}} />
 
-          <DashboardInput value={projet.description} setValue={setProjet} setValueKey="description" fontSize={.7} style={{
-            marginTop: "-10px",
-            marginBottom: "50px"
-          }} />
+          <textarea className={"description-textarea"} value={projet.description} onChange={(e) => {
+              let textarea = e.target;
+              textarea.style.height = "1px";
+              textarea.style.height = ( 18*.9 + textarea.scrollHeight ) + "px";
+
+              setProjet((prev) => ({...prev, description: e.target.value}));
+          }} style={{
+          }}></textarea>
 
 
           <select className="project-type" value={projet.type} onChange={(e) => {
@@ -288,7 +291,12 @@ function ProjectInformations( { projet, infoPage, project, index, setProjet }: {
   <section className="information-container">
   <input onChange={(e) => updateValue("title", e.target.value)} style={{fontSize: `2rem`}} value={projet.title} placeholder={`Veuillez renseignez le titre de section`} />
 
-  <textarea onChange={(e) => updateValue("description", e.target.value)} style={{ resize: "none", height: "auto", width: "50%", fontSize: `1rem`}} value={projet.description} placeholder={`Veuillez renseignez le description de la section`} />
+  <textarea onChange={(e) => {
+      let textarea = e.target;
+      textarea.style.height = "1px";
+      textarea.style.height = ( 18*.9 + textarea.scrollHeight ) + "px";
+      updateValue("description", e.target.value)
+  }} style={{ outline: 0, resize: "none", height: "auto", width: "50%", fontSize: `1rem`}} value={projet.description} placeholder={`Veuillez renseignez le description de la section`} />
   </section>
 
   <section className="images-container">

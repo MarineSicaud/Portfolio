@@ -45,10 +45,16 @@ function NewReview({ params }: { params: Promise<{ id: string }>}){
       <DashboardInput value={review.job} setValueKey="job" setValue={setReview} fontSize={.8} />
     </div>
 
-    <textarea value={review.review} onChange={(e) => setReview((prev) => ({
+    <textarea value={review.review} onChange={(e) => {
+        let textarea = e.target;
+        textarea.style.height = "1px";
+        textarea.style.height = ( 18*.9 + textarea.scrollHeight ) + "px";
+        setReview((prev) => ({
       ...prev,
       review: e.target.value
-    }))} placeholder="Veuillez entrer l'avis"/>
+    }))}}
+    style={{ outline: "none" }}
+    placeholder="Veuillez entrer l'avis"/>
   </article> 
 
   {

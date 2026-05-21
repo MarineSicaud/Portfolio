@@ -45,17 +45,23 @@ function NewDiplome( {params} : { params: Promise<{ id: string }>}){
   }, [id])
 
   return <section className="new-diplome-page">
-      <li className="diplome-container" style={contentRef.current ? {height: `${contentRef.current.scrollHeight}px`}: {}} ref={contentRef}>
+      <li className="diplome-container">
     <div className="diplome-information">
       <span> <DashboardInput style={{marginLeft: "0", marginRight: "10px"}} value={diplome.ecole} fontSize={1.3} setValue={setDiplome} setValueKey="ecole" /> - <DashboardInput style={{marginLeft: "10px"}} value={diplome.diplome} fontSize={1} setValue={setDiplome} setValueKey="diplome" /></span>
 
       <span className="active-arrow" style={{ background: Colors.Rose, transform: "rotate(180deg)"}}/>
     </div>
 
-    <textarea value={diplome.description} onChange={(e) => setDiplome((prev) => ({
+    <textarea value={diplome.description} onChange={(e) => {
+        let textarea = e.target;
+        textarea.style.height = "1px";
+        textarea.style.height = ( 18*.9 + textarea.scrollHeight ) + "px";
+        setDiplome((prev) => ({
       ...prev,
       description: e.target.value
-    }))} placeholder="Description du diplome"/>
+    }))}}
+    style={{ outline: "none" }}
+    placeholder="Description du diplome"/>
   </li>
 
   {
