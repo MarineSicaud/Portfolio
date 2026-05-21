@@ -52,7 +52,12 @@ function ProjectComponent({ project, updating }: { project: F_ProjectComponentTy
       <span className="change-cursor" style={{ top: position.top, left: position.left }}/>
     </div>
 
-    <h3>{project.title}</h3>
+    <section className="double-text-container" style={{ height: "2.3rem", "--scroll": "-3.7rem"}}>
+        <section className="double-text">
+            <h3>{project.title}</h3>
+            <h3>{project.title}</h3>
+        </section>
+    </section>
 
     <ul className="project-categories-container">
       {

@@ -23,7 +23,11 @@ export type usePageReturn = {
 
 function usePage(){
   const [responsiveInfo, setResponciveInfo] = React.useState<ResponsiveValues>(ResponsiveValues.Mobile)
-  const [windowInfo, setWindowInfo] = React.useState<WindowType | null>(null)
+  const [windowInfo, setWindowInfo] = React.useState<WindowType>({
+    width: 0,
+    height: 0,
+    scrollY: 0
+  })
   const [isMounted, setIsMounted] = React.useState(false)
 
   React.useEffect(() => {
@@ -48,7 +52,7 @@ function usePage(){
   }
 
   function updateScrollWindow(){
-    let scrollY = window.scrollY
+    let scrollY = window.scrollY + window.innerHeight / 2;
 
     setWindowInfo((prev) => {
       if(!prev) return null

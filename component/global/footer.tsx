@@ -20,7 +20,19 @@ function Footer(){
   ]
 
   return <footer>
-    <p className="footer-title">Travaillons <span style={{color: "#F874D8"}}>Ensemble</span> !</p>
+        <p className="footer-title" style={{display: "flex", gap: "5px"}}>
+            Travaillons 
+            <section 
+                style={{ "--scroll": "-2.5rem" }}
+                className="double-text-container"
+            >
+                <section className="double-text">
+                    <span style={{color: "#F874D8"}}>Ensemble</span> 
+                    <span style={{color: "#F874D8"}}>Ensemble</span> 
+                </section>
+            </section>
+            !
+        </p>
 
     <ul className="auto-scroll-footer">
 
@@ -45,9 +57,10 @@ function Footer(){
             key={s.id}
             href={s.link}
             target="_blank"
-            className="social-media-container"
+            className="double-text-container"
+            style={{ "--scroll": "-2.5rem" }}
           >
-            <section className="social-media">
+            <section className="double-text">
               <span>{s.name}</span>
               <span>{s.name}</span>
             </section>
