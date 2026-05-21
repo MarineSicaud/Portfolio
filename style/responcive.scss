@@ -1,6 +1,8 @@
 @use "./lib/variables" as vars;
 
 @include vars.mobile {
+  body { overflow-x: clip }
+
   .mobile-header {
     top: 0;
     left: 0;
@@ -377,6 +379,7 @@
 
   .slider-container .slider span {
     font-size: 70px !important;
+    overflow-x: hidden;
   }
 
   .categories-container {
@@ -402,56 +405,57 @@
 
 
   // Reviews
-  .homepage-reviews-container {
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
-  }
-
-  .reviews-container {
-    .right-arrow {
-      top: -50%;
-      right: 0 !important;
-    }
-
-    .left-arrow {
-      top: -50%;
-      right: 15%;
-      left: unset !important;
-    }
-  }
-
-  .reviews-scroll-container {
-    justify-content: center;
-  }
-
-  .new-review-container {
-    display: flex !important;
-  }
-
-
-  .review-container {
-    max-width: 95% !important;
-    min-width: unset !important;
-    width: 90% !important;
-    padding: 20px 0px !important;
-    scale: 1 !important;
-
-    &:nth-child(1){
-      display: none !important;
-    }
-
-    &:nth-child(3){
-      display: none !important;
-    }
-
-    .review {
-      font-size: .9rem;
-    }
-  }
+  // .homepage-reviews-container {
+  //   padding-top: 100px !important;
+  //   padding-bottom: 100px !important;
+  // }
+  //
+  // .reviews-container {
+  //   .right-arrow {
+  //     top: -50%;
+  //     right: 0 !important;
+  //   }
+  //
+  //   .left-arrow {
+  //     top: -50%;
+  //     right: 15%;
+  //     left: unset !important;
+  //   }
+  // }
+  //
+  // .reviews-scroll-container {
+  //   justify-content: center;
+  // }
+  //
+  // .new-review-container {
+  //   display: flex !important;
+  // }
+  //
+  //
+  // .review-container {
+  //   max-width: 95% !important;
+  //   min-width: unset !important;
+  //   width: 90% !important;
+  //   padding: 20px 0px !important;
+  //   scale: 1 !important;
+  //
+  //   &:nth-child(1){
+  //     display: none !important;
+  //   }
+  //
+  //   &:nth-child(3){
+  //     display: none !important;
+  //   }
+  //
+  //   .review {
+  //     font-size: .9rem;
+  //   }
+  // }
 
   // Footer 
   footer {
     gap: 20px !important;
+    overflow-x: hidden;
 
     .auto-scroll-footer a {
       font-size: 30px !important;
@@ -976,6 +980,7 @@
 
   // Categories
   .categories-homepage {
+
     .homepage-categories-sphere-1 {
       width: 600px !important;
       height: 600px !important;

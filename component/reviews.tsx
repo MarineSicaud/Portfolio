@@ -2,8 +2,11 @@
 
 export const dynamic = 'force-dynamic';
 
+import { Colors } from "@/component/global/sphere";
+import { usePage } from "@/hooks/usePage"
 import { ReviewType } from "@/types/review_type"
 import { Fetching } from "@/utils/fetching"
+import { SectionTitle } from "@/component/global/sectionTitle";
 import Link from "next/link"
 import * as REACT from "react"
 
@@ -12,57 +15,45 @@ type Props = {
   dashboard?: boolean
 }
 
-function Reviews({ reviews, dashboard = false }: Props){
-  const [index, setIndex] = REACT.useState(0)
+function offsetTop(element: HTMLElement, acc = 0) {
+  if (element.offsetParent) {
+    return offsetTop(element.offsetParent, acc + element.offsetTop);
+  }
+  return acc + element.offsetTop;
+}
 
-  return <section className="reviews-container">
-    <ul className="reviews-scroll-container">
-      {
-        reviews[index - 1] ? 
-          <Review review={reviews[index - 1]} is_active={false} dashobard={false}/>
-          : 
-          <Review review={reviews[reviews.length - 1]} is_active={false} dashobard={false} />
-      }
-
-      <Review review={reviews[index]} is_active={true} dashobard={dashboard} />
-
-      {
-        reviews[index + 1] ? 
-          <Review review={reviews[index + 1]} is_active={false} dashobard={false} />
-          : 
-          <Review review={reviews[0]} is_active={false} dashobard={false} />
-      }
+function Reviews({ reviews, dashboard }: Props){
+  return <section className="reviews-container" style={{ height: `${reviews.length * 100}vh` }}>
+    <ul>
+        {
+            reviews.map((r, i) => <Review key={i} review={r} index={i} dashboard={dashboard} />)
+        }
     </ul>
-
-    <span className="right-arrow" onClick={() => {
-      if(index === reviews.length - 1) {
-        setIndex(0)
-      }else {
-        setIndex(index + 1)
-      }
-    }}/>
-    <span className="left-arrow" onClick={() => {
-      if(index === 0) {
-        setIndex(reviews.length - 1)
-      }else {
-        setIndex(index - 1)
-      }
-    }}/>
   </section>
 }
 
-function Review({ review, is_active, dashobard }: { review: ReviewType, is_active: boolean, dashobard: boolean }){
+function Review({ review, index, dashboard }: { review: ReviewType, index: number, dashboard: boolean }){
+    const elRef = REACT.useRef<HTMLElement>(null)
+    const [height, setHeight] = REACT.useState(0)
+
+    console.log(dashboard)
+
+  REACT.useEffect(() => {
+    if (elRef.current) {
+      setHeight(elRef.current.offsetHeight)
+    }
+  }, [elRef])
 
   async function deleteReview(){
     await Fetching.deleteDatas("/reviews", review._id)
   }
 
-  return <article className="review-container" style={{ scale: is_active ? "1.2" : ".6"}}>
+  return <article className="review-container" ref={elRef} style={{ "--height": `${height}px` }}>
   {
-    dashobard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
+    dashboard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
   }
     <div className="review-user-information">
-      <h4>{review.name}</h4>
+      <h2>{review.name}</h2>
       {
         review.job ?
           <p className="user-job">{review.job}</p>
