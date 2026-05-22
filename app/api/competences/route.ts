@@ -86,7 +86,7 @@ async function PATCH(req: Request) {
   let push_passed = true
 
   if ( filter_image_to_push.files.length > 0 ){
-    let push_images = await github_manager.push_gihtub_files(filter_image_to_push)
+    let push_images = await github_manager.push_gihtub_files(filter_image_to_push.files)
 
     push_passed = push_images
   }
