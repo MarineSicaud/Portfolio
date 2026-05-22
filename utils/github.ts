@@ -57,7 +57,7 @@ class Github {
   private async create_tree(sha: string, files: FileType[]): Promise<string> {
     const treeItems = [];
 
-    for (const file of files.files) {
+    for (const file of files) {
       const blobSha = await this.create_blob(file.content);
       treeItems.push({
         path: file.path.replace(/^\/+/, ""), // enlever les / au début
