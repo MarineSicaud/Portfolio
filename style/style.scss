@@ -426,10 +426,30 @@ nav {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
+    gap: 300px;
     align-items: center;
     height: 100%;
+    position: relative;
   }
+
+  .review-separator-container {
+    position: sticky;
+    top: calc(50vh - var(--height) / 2);
+  }
+
+  .review-separator {
+    width: 100vw;
+    height: 50vh;
+    background: vars.$background;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
 
   .review-container {
     background: vars.$background;
@@ -440,8 +460,6 @@ nav {
     padding: 50px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     transition: scale .3s;
-    position: sticky;
-    top: calc(50vh - var(--height) / 2);
     border-radius: 30px;
 
     .review-user-information {

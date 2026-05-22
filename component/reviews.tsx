@@ -16,15 +16,8 @@ type Props = {
   dashboard?: boolean
 }
 
-function offsetTop(element: HTMLElement, acc = 0) {
-  if (element.offsetParent) {
-    return offsetTop(element.offsetParent, acc + element.offsetTop);
-  }
-  return acc + element.offsetTop;
-}
 
 function Reviews({ reviews, dashboard }: Props){
-    console.log(reviews)
   return <section className="reviews-container" style={{ height: `${reviews.length * 100}vh` }}>
     <ul>
         {
@@ -37,7 +30,6 @@ function Reviews({ reviews, dashboard }: Props){
 function Review({ review, index, dashboard }: { review: ReviewType, index: number, dashboard: boolean }){
     const elRef = REACT.useRef<HTMLElement>(null)
     const [height, setHeight] = REACT.useState(0)
-    console.log(review)
 
   REACT.useEffect(() => {
     if (elRef.current) {
@@ -49,10 +41,12 @@ function Review({ review, index, dashboard }: { review: ReviewType, index: numbe
     await Fetching.deleteDatas("/reviews", review._id)
   }
 
-  return <article className="review-container" ref={elRef} style={{ "--height": `${height}px` }}>
-  {
-    dashboard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
-  }
+  return <section className="review-separator-container" ref={elRef} style={{ "--height": `${height}px` }}>
+    <div className="review-separator"></div>
+    <article className="review-container">
+    {
+        dashboard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
+    }
     <div className="review-user-information">
         <section>
             {
@@ -78,7 +72,8 @@ function Review({ review, index, dashboard }: { review: ReviewType, index: numbe
     </div>
 
     <p className="review">{review.review}</p> 
-  </article>
+    </article>
+    </section>
 }
 
 export { Reviews }

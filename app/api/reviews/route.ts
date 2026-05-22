@@ -40,7 +40,6 @@ async function POST(req: Request) {
   let push_passed = true
 
   if ( filter_image_to_push.files.length > 0 ) {
-    console.log(filter_image_to_push.files)
     let push_images = await github_manager.push_gihtub_files(filter_image_to_push.files)
 
     push_passed = push_images
