@@ -37,6 +37,7 @@ function Reviews({ reviews, dashboard }: Props){
 function Review({ review, index, dashboard }: { review: ReviewType, index: number, dashboard: boolean }){
     const elRef = REACT.useRef<HTMLElement>(null)
     const [height, setHeight] = REACT.useState(0)
+    console.log(review)
 
   REACT.useEffect(() => {
     if (elRef.current) {
@@ -55,7 +56,7 @@ function Review({ review, index, dashboard }: { review: ReviewType, index: numbe
     <div className="review-user-information">
         <section>
             {
-                review.image && review.image !== "undefined" &&
+                review.image && review.image !== "undefined" ?
                 <div className="image-container">
                 <Image
                     alt={`logo de ${review.name}`}
@@ -64,6 +65,7 @@ function Review({ review, index, dashboard }: { review: ReviewType, index: numbe
                     height={50}
                 />
                 </div>
+                : <div className="image-container grey-bg"></div>
             }
             <h2>{review.name}</h2>
         </section>

@@ -48,7 +48,7 @@ class Review {
         review,
         name,
         job,
-        image: typeof image === "string" ? image : `/image/${image.name}`
+        image: typeof image === "string" ? image : `/images/${image.name}`
       }
     )
 
