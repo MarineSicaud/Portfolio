@@ -3,6 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { Colors } from "@/component/global/sphere";
+import Image from "next/image"
 import { usePage } from "@/hooks/usePage"
 import { ReviewType } from "@/types/review_type"
 import { Fetching } from "@/utils/fetching"
@@ -23,6 +24,7 @@ function offsetTop(element: HTMLElement, acc = 0) {
 }
 
 function Reviews({ reviews, dashboard }: Props){
+    console.log(reviews)
   return <section className="reviews-container" style={{ height: `${reviews.length * 100}vh` }}>
     <ul>
         {
@@ -35,8 +37,6 @@ function Reviews({ reviews, dashboard }: Props){
 function Review({ review, index, dashboard }: { review: ReviewType, index: number, dashboard: boolean }){
     const elRef = REACT.useRef<HTMLElement>(null)
     const [height, setHeight] = REACT.useState(0)
-
-    console.log(dashboard)
 
   REACT.useEffect(() => {
     if (elRef.current) {
@@ -53,7 +53,20 @@ function Review({ review, index, dashboard }: { review: ReviewType, index: numbe
     dashboard && <> <Link href={`/dashboard/reviews/${review._id}`}> Modifier </Link>   <button className="delete-button" onClick={() => deleteReview()}>Supprimer</button></>
   }
     <div className="review-user-information">
-      <h2>{review.name}</h2>
+        <section>
+            {
+                review.image && review.image !== "undefined" &&
+                <div className="image-container">
+                <Image
+                    alt={`logo de ${review.name}`}
+                    src={review.image}
+                    width={50}
+                    height={50}
+                />
+                </div>
+            }
+            <h2>{review.name}</h2>
+        </section>
       {
         review.job ?
           <p className="user-job">{review.job}</p>

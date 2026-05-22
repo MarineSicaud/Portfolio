@@ -20,12 +20,13 @@ class Review {
 
   // New review
   static async new_review(r: NewReviewType): Promise<boolean> {
-    const { review, name, job } = r
+    const { review, name, job, image } = r
 
     let create_review = await ReviewModel.create({
       review,
       name,
-      job
+      job,
+      image: `/images/${image.name}`
     })
 
     if ( create_review.__v !== null && create_review !== undefined) {
@@ -37,7 +38,7 @@ class Review {
 
   // Update review
   static async update_review(r: ReviewType): Promise<boolean> {
-    const { _id, review, name, job } = r
+    const { _id, review, name, job, image } = r
 
     let updating_review = await ReviewModel.updateOne(
       {
@@ -46,7 +47,8 @@ class Review {
       {
         review,
         name,
-        job
+        job,
+        image: typeof image === "string" ? image : `/image/${image.name}`
       }
     )
 

@@ -383,13 +383,13 @@
   }
 
   .categories-container {
-    font-size: 15vw !important;
+    font-size: 12vw !important;
   }
 
 
   // Competences
   .competence-component img {
-    height: 50px;
+    height: 40px;
   }
 
   .homepage-competences-container {
@@ -403,6 +403,18 @@
     }
   }
 
+  //diplome
+  .diplomes-container .diplome-container .diplome-information p {
+    font-size: 1rem;
+  }
+
+  .diplomes-container {
+    .active-arrow {
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
+
 
   // Reviews
   .homepage-reviews-container {
@@ -413,6 +425,10 @@
     ul {
       justify-content: start;
       gap: 200px;
+
+      .review {
+        font-size: 0.7rem; 
+      }
     }
   }
 
@@ -456,6 +472,9 @@
         li {
           font-size: 5.3vw !important;
           padding: .8vw 1vw !important;
+          top: var(--resp-top) !important;
+          left: var(--resp-left) !important;
+          rotate: var(--resp-deg) !important;
         }
       }
     }

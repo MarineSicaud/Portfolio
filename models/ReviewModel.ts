@@ -13,6 +13,10 @@ const ReviewSchema = new mongoose.Schema({
     type: String,
     require: false
   },
+  image: {
+    type: String,
+    require: true
+  }
 }, { strict: true })
 
 export default mongoose.models['reviews'] || mongoose.model("reviews", ReviewSchema)

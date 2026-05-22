@@ -1,5 +1,7 @@
 import { StatusCode } from "@/types/http_response_type";
 import { NewReviewType, ReviewType } from "@/types/review_type"
+import { ImagesGestion } from "@/utils/file";
+import { Github } from "@/utils/github";
 import { formToObject } from "@/utils/formToObject";
 import { HttpResponse } from "@/utils/http_response";
 import { connectionToDatabase } from "@/utils/mongodb";
@@ -30,9 +32,28 @@ async function POST(req: Request) {
   const formData = await req.formData()
   const review = formToObject<NewReviewType>(formData)
 
-  let new_review = await Review.new_review(review)
+  let image_gestion = new ImagesGestion()
+  let github_manager = new Github()
 
-  if ( new_review ) return HttpResponse(StatusCode.Success)
+  let filter_image_to_push = await image_gestion.append_file([review.image])
+
+  let push_passed = true
+
+  if ( filter_image_to_push.files.length > 0 ) {
+    let push_images = await github_manager.push_gihtub_files(filter_image_to_push.files)
+
+    push_passed = push_images
+  }
+
+  if ( push_passed ) {
+    let save_images = await filter_image_to_push.new_image()
+
+    if ( !save_images ) return HttpResponse(StatusCode.ConflicWithServer)
+        console.log(review)
+        let new_review = await Review.new_review(review)
+
+        if ( new_review ) return HttpResponse(StatusCode.Success)
+  }
 
   return HttpResponse(StatusCode.ConflicWithServer)
 }
@@ -45,9 +66,35 @@ async function PATCH(req: Request){
 
   if ( !review._id ) return HttpResponse(StatusCode.NotFound)
 
-  let update_review = await Review.update_review(review)
+  let image_gestion = new ImagesGestion()
+  let github_manager = new Github()
 
-  if ( update_review ) return HttpResponse(StatusCode.Success)
+  let images = []
+
+  if ( typeof review.image !== "string") {
+    images.push(review.image)
+  }
+
+  let filter_image_to_push = await image_gestion.append_file(images)
+
+  let push_passed = true
+
+  if ( filter_image_to_push.files.length > 0 ){
+    let push_images = await github_manager.push_gihtub_files(filter_image_to_push)
+
+    push_passed = push_images
+  }
+
+  if ( push_passed ) {
+      let save_images = await filter_image_to_push.new_image()
+
+      if ( !save_images ) return HttpResponse(StatusCode.ConflicWithServer)
+
+      let update_review = await Review.update_review(review)
+
+      if ( update_review ) return HttpResponse(StatusCode.Success)
+  }
+
 
   return HttpResponse(StatusCode.ConflicWithServer)
 }

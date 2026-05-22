@@ -53,6 +53,7 @@ async function POST(req: Request){
 
     if ( !save_images ) return HttpResponse(StatusCode.ConflicWithServer)
 
+        console.log(competence)
     const new_comp = await Competences.new_competence(competence)
 
     if ( !new_comp ) return HttpResponse(StatusCode.ConflicWithServer)
