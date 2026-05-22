@@ -15,6 +15,11 @@ const skills = [
       x: 50,
       y: 92,
       deg: 0
+    },
+    responcivePosition: {
+      x: 50,
+      y: 92,
+      deg: 0
     }
   },
   {
@@ -23,6 +28,11 @@ const skills = [
     position: {
       x: 4,
       y: 87,
+      deg: 60
+    },
+    responcivePosition: {
+      x: -1,
+      y: 85,
       deg: 60
     }
   },
@@ -33,6 +43,11 @@ const skills = [
       x: 46,
       y: 81.7,
       deg: 0
+    },
+    responcivePosition: {
+      x: 50,
+      y: 79.9,
+      deg: 0
     }
   },
   {
@@ -42,6 +57,11 @@ const skills = [
       x: 78,
       y: 68,
       deg: -25
+    },
+    responcivePosition: {
+      x: 79,
+      y: 47,
+      deg: -63
     }
   },
   {
@@ -50,6 +70,11 @@ const skills = [
     position: {
       x: 40,
       y: 72,
+      deg: 10
+    },
+    responcivePosition: {
+      x: 42,
+      y: 69,
       deg: 10
     }
   },
@@ -60,6 +85,11 @@ const skills = [
       x: 65,
       y: 65.5,
       deg: 12
+    },
+    responcivePosition: {
+      x: 65,
+      y: 60.5,
+      deg: 12
     }
   },
   {
@@ -69,6 +99,11 @@ const skills = [
       x: 20,
       y: 57.5,
       deg: 20
+    },
+    responcivePosition: {
+      x: 26.5,
+      y: 53.5,
+      deg: 15
     }
   },
   {
@@ -78,6 +113,11 @@ const skills = [
       x: 75,
       y: 58.5,
       deg: 12
+    },
+    responcivePosition: {
+      x: 70,
+      y: 43,
+      deg: 1
     }
   },
   {
@@ -87,6 +127,11 @@ const skills = [
       x: 39,
       y: 46.5,
       deg: 5
+    },
+    responcivePosition: {
+      x: 22,
+      y: 39,
+      deg: 13
     }
   },
   {
@@ -96,6 +141,11 @@ const skills = [
       x: 22,
       y: 34,
       deg: 2
+    },
+    responcivePosition: {
+      x: 32,
+      y: 30,
+      deg: 14
     }
   },
   {
@@ -105,6 +155,11 @@ const skills = [
       x: 79,
       y: 46.8,
       deg: 10
+    },
+    responcivePosition: {
+      x: 53,
+      y: 32,
+      deg: 30
     }
   },
 ]
@@ -159,6 +214,9 @@ function Skills() {
     }}
     style={{ 
         "--background-color": colors[v.color],
+        "--resp-top": `${v.responcivePosition.y}%`, 
+        "--resp-left": `${v.responcivePosition.x}%`, 
+        "--resp-deg": `${v.responcivePosition.deg}deg`,
         background: colors[v.color], 
         top: `${v.position.y}%`, 
         left: `${v.position.x}%`, 

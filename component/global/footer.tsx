@@ -20,19 +20,19 @@ function Footer(){
   ]
 
   return <footer>
-        <p className="footer-title" style={{display: "flex", gap: "5px"}}>
+        <span className="footer-title" style={{display: "flex", gap: "5px"}}>
             Travaillons 
-            <section 
+            <div
                 style={{ "--scroll": "-2.5rem" }}
                 className="double-text-container"
             >
-                <section className="double-text">
+                <div className="double-text">
                     <span style={{color: "#F874D8"}}>Ensemble</span> 
                     <span style={{color: "#F874D8"}}>Ensemble</span> 
-                </section>
-            </section>
+                </div>
+            </div>
             !
-        </p>
+        </span>
 
     <ul className="auto-scroll-footer">
 
