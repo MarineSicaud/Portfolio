@@ -110,7 +110,7 @@ function ProjectInformations( { projet, infoPage }: { projet: F_ProjectContentTy
     <section className="information-container">
       <h2>{projet.title}</h2>
 
-      <p>{projet.description}</p>
+      <p style={{ whiteSpace: "pre-line"}}>{projet.description}</p>
     </section>
 
     <section className="images-container">
