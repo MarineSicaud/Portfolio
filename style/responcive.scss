@@ -491,6 +491,8 @@
     .image-container {
       width: 90vw !important;
       padding: 0 !important;
+
+      img { bottom: 0 !important; }
     }
 
     .information-container h3 {
@@ -1113,6 +1115,8 @@
 
     .image-container {
       padding: 0 !important;
+
+      img { bottom: 0 !important; }
     }
   }
 
