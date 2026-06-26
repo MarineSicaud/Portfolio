@@ -63,7 +63,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
           </ul>
 
           <ul>
-            <li>Duree</li>
+            <li>Durée</li>
             <li>{projet.duree}</li>
           </ul>
 
