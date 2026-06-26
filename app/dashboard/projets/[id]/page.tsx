@@ -167,7 +167,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
         </ul>
 
         <ul>
-          <li>Duree</li>
+          <li>Durée</li>
 
           <li>
             <DashboardInput value={projet.duree} setValue={setProjet} setValueKey="duree" fontSize={1} style={{ width: "100px", paddingLeft: "10px"}} />
