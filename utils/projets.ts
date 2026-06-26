@@ -124,11 +124,13 @@ class Projet {
       content: content_with_image_path
     })
 
+
     const project_component_update = await ProjetComponentModel.updateOne(
       { id_projet: new mongoose.Types.ObjectId(_id) },
       {
         title,
         description,
+        type,
         services,
         image_url: typeof background_image === "string" ? background_image : `/images/${background_image.name}`,
       }
