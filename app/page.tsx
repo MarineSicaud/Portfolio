@@ -171,7 +171,7 @@ export default async function Home() {
 
         <ul className="categories-container">
           <Link href={"/projets?type=Marketing"} style={{color: Colors.Violet}}>Marketing</Link>
-          <Link href={"/projets?type=Social-Media"} style={{color: Colors.Orange}}>Social Media</Link>
+          <Link href={"/projets?type=Communication"} style={{color: Colors.Orange}}>Communication</Link>
           <Link href={"/projets?type=Branding"} style={{color: Colors.Rose}}>Branding</Link>
         </ul>
 

@@ -26,7 +26,7 @@ function ProjectFilter({ filter, setFilter }: Props){
     <select className="filter-select type" value={filter.type || ""} onChange={(e) => handleChange(e.target.value, "type")}>
       <option value="">Type</option>
       <option value="Marketing">Marketing</option>
-      <option value="Social-Media">Social Media</option>
+      <option value="Commnunication">Communication</option>
       <option value="Branding">Branding</option>
     </select>
 

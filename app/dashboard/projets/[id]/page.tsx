@@ -111,7 +111,7 @@ function NewProject({ params }: { params: Promise<{ id: string }>} ){
           }}>
             <option value={""}>Choisissez un type pour votre projet</option>
             <option value={"Marketing"}>Marketing</option>
-            <option value={"Social-Media"}>Social Media</option>
+            <option value={"Communication"}>Communication</option>
             <option value={"Branding"}>Branding</option>
           </select>
 
